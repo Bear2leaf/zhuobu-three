@@ -1,0 +1,23 @@
+{
+    "name": "zhuobu-three",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "esbuild src/main.ts --outdir=dist --bundle --format=esm --sourcemap --outdir=dist",
+        "dev": "esbuild --sourcemap src/main.ts  --outdir=dist --bundle --format=esm --watch  --servedir=."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/three": "^0.168.0",
+        "esbuild": "^0.21.5",
+        "minigame-api-typings": "^3.8.4"
+    },
+    "dependencies": {
+        "three": "^0.168.0",
+        "yuka": "^0.7.8"
+    }
+}
