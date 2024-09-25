@@ -84,7 +84,7 @@ const document = {
             }
             canvas.removeEventListener = function () { tempFuncWrapper('HTMLElement.removeEventListener', [...arguments]); }
             canvas.addEventListener = function () {
-                tempFuncWrapper('HTMLElement.addEventListener', [...arguments]);
+                // tempFuncWrapper('HTMLElement.addEventListener', [...arguments]);
                 document.addEventListener(...arguments);
             }
             canvas.focus = function () {
@@ -180,6 +180,16 @@ function Image() {
     return wx.createImage();
 }
 function noop() { }
+function pointerEventHandlerFactory(type) {
+    return (event) => {
+        event.type = type;
+        event.offsetX = event.changedTouches[0].clientX;
+        event.offsetY = event.changedTouches[0].clientY;
+        event.preventDefault = noop;
+        event.stopPropagation = noop;
+        document.dispatchEvent(event)
+    }
+}
 function touchEventHandlerFactory(type) {
     return (event) => {
         event.type = type;
@@ -198,10 +208,9 @@ function wheelEventHandlerFactory(type) {
     }
 }
 
-wx.onTouchStart(touchEventHandlerFactory('touchstart'))
-wx.onTouchMove(touchEventHandlerFactory('touchmove'))
-wx.onTouchEnd(touchEventHandlerFactory('touchend'))
-wx.onTouchCancel(touchEventHandlerFactory('touchcancel'))
+wx.onTouchStart(pointerEventHandlerFactory('pointerdown'))
+wx.onTouchMove(pointerEventHandlerFactory('pointermove'))
+wx.onTouchEnd(pointerEventHandlerFactory('pointerup'))
 wx.onWheel(wheelEventHandlerFactory('wheel'))
 
 class ResizeObserver {
