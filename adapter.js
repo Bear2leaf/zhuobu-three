@@ -218,6 +218,8 @@ function pointerEventHandlerFactory(type) {
             document.dispatchEvent({
                 pageX: change.pageX,
                 pageY: change.pageY,
+                offsetX: change.offsetX,
+                offsetY: change.offsetY,
                 pointerId: change.identifier,
                 type,
                 pointerType: "touch"
