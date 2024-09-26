@@ -2,7 +2,7 @@
 import * as THREE from 'three';
 import Device from './device/Device.js';
 import { createRoot, events, extend } from '@react-three/fiber';
-import App from './App.js';
+import App from './component/App.js';
 export default class Engine {
     constructor(device: Device) {
         extend(THREE);

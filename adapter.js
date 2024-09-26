@@ -94,6 +94,8 @@ const document = {
                     offsetWidth: windowInfo.windowWidth,
                     offsetHeight: windowInfo.windowHeight
                 };
+                canvas.clientHeight = windowInfo.windowHeight;
+                canvas.clientWidth = windowInfo.windowWidth;
                 canvas.removeEventListener = function () { tempFuncWrapper('HTMLElement.removeEventListener', [...arguments]); }
                 canvas.addEventListener = function () {
                     // tempFuncWrapper('HTMLElement.addEventListener', [...arguments]);
@@ -123,6 +125,14 @@ const document = {
                         width: windowInfo.windowWidth,
                         height: windowInfo.windowHeight
                     }
+                }
+                canvas.ownerDocument = document;
+
+                canvas.releasePointerCapture = function () {
+                    document.releasePointerCapture(...arguments)
+                }
+                canvas.setPointerCapture = function () {
+                    document.setPointerCapture(...arguments)
                 }
             }
 
@@ -168,6 +178,12 @@ const document = {
             }
         }
     },
+    releasePointerCapture() {
+        tempFuncWrapper("document.releasePointerCapture", [...arguments])
+    },
+    setPointerCapture() {
+        tempFuncWrapper("document.setPointerCapture", [...arguments])
+    }
 }
 
 class Blob {
@@ -196,12 +212,17 @@ function Image() {
 function noop() { }
 function pointerEventHandlerFactory(type) {
     return (event) => {
-        event.type = type;
-        event.offsetX = event.changedTouches[0].clientX;
-        event.offsetY = event.changedTouches[0].clientY;
-        event.preventDefault = noop;
-        event.stopPropagation = noop;
-        document.dispatchEvent(event)
+        const touches = [];
+        touches.push(...event.changedTouches)
+        for (const change of touches) {
+            document.dispatchEvent({
+                pageX: change.pageX,
+                pageY: change.pageY,
+                pointerId: change.identifier,
+                type,
+                pointerType: "touch"
+            })
+        }
     }
 }
 function touchEventHandlerFactory(type) {
@@ -225,7 +246,7 @@ function wheelEventHandlerFactory(type) {
 wx.onTouchStart(pointerEventHandlerFactory('pointerdown'))
 wx.onTouchMove(pointerEventHandlerFactory('pointermove'))
 wx.onTouchEnd(pointerEventHandlerFactory('pointerup'))
-wx.onWheel(wheelEventHandlerFactory('wheel'))
+wx.onTouchCancel(pointerEventHandlerFactory('pointercancel'))
 
 class ResizeObserver {
     observe() {
@@ -283,7 +304,6 @@ const _window = {
     WebAssembly: {
         Instance: WXWebAssembly.Instance,
         instantiate(path, imports) {
-            console.log(...arguments)
             if (path.length < 1e5) {
                 return WXWebAssembly.instantiate("/resources/wasm/yoga-wasm-base64-esm.wasm", imports)
             } else {

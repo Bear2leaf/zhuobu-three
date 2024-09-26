@@ -1,13 +1,13 @@
 import React, { act, useRef, useState } from 'react'
 import { useFrame, Vector3 } from '@react-three/fiber'
 import { Mesh } from 'three'
-import { useBearStore } from './state.js'
-import { Root, Fullscreen, Container, FontFamilyProvider, Text } from '@react-three/uikit'
+import { useBearStore } from '../state.js'
 
 
 
-import { Torus } from "@react-three/drei";
+import { OrbitControls, Torus } from "@react-three/drei";
 import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
+import { UIRoot } from './ui/UIRoot.js';
 
 function Box(props: { position: Vector3 }) {
   const mesh = useRef<Mesh>(null)
@@ -32,6 +32,7 @@ function Box(props: { position: Vector3 }) {
 export default function App() {
   return (
     <>
+      <OrbitControls></OrbitControls>
       <ambientLight intensity={Math.PI / 2} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
@@ -45,20 +46,7 @@ export default function App() {
 
         <CuboidCollider position={[0, -2, 0]} args={[20, 0.5, 20]} />
       </Physics>
-      <Root>
-        <Fullscreen flexDirection="column" padding={10} gap={10}>
-          <Container flexGrow={1} backgroundOpacity={0.5} hover={{ backgroundOpacity: 1 }} backgroundColor="red" />
-          <Container flexGrow={1} backgroundOpacity={0.5} hover={{ backgroundOpacity: 1 }} backgroundColor="blue" />
-        </Fullscreen>
-        <FontFamilyProvider
-          roboto={{
-            bold: "resources/font/NotoSansSC-Bold.json",
-          }}
-        >
-          <Text fontFamily="roboto" color="red" fontSize={72}>关卡</Text>
-        </FontFamilyProvider>
-      </Root>
-
+      {/* <UIRoot></UIRoot> */}
     </>
   )
 }
