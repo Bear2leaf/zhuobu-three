@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "esbuild src/main.ts --outdir=dist --bundle --format=cjs --sourcemap --outdir=dist",
+        "build": "esbuild src/main.ts src/tw-to-css.ts src/prettier/plugins/estree.ts src/prettier/standalone.ts --outdir=dist --minify --bundle --format=cjs --target=es2015 --sourcemap --outdir=dist --external:tw-to-css --external:prettier",
         "dev": "esbuild --sourcemap src/main.ts  --outdir=dist --bundle --format=esm --watch  --servedir=."
     },
     "keywords": [],
@@ -17,8 +17,13 @@
         "minigame-api-typings": "^3.8.4"
     },
     "dependencies": {
+        "@react-three/drei": "^9.114.0",
         "@react-three/fiber": "^8.17.8",
+        "@react-three/rapier": "^1.4.0",
+        "@react-three/uikit": "^0.5.4",
         "react": "^18.3.1",
-        "three": "^0.168.0"
+        "react-dom": "^18.3.1",
+        "three": "^0.168.0",
+        "zustand": "^5.0.0-rc.2"
     }
 }

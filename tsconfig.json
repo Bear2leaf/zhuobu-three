@@ -3,8 +3,9 @@
     "strict": true,
     "module": "ESNext",
     "target": "ES2015",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "jsx": "react",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   }
 }

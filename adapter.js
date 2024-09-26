@@ -1,6 +1,9 @@
 
 const context = wx.createWebAudioContext();
 
+const tempFuncWrapper = function (name, args) {
+    console.warn(`${name} with ${args} is called in weapp!`)
+}
 const { platform } = wx.getSystemInfoSync()
 const navigator = {
     platform,
@@ -10,6 +13,9 @@ const navigator = {
 }
 
 class AudioContext {
+    constructor() {
+        this.destination = context.destination;
+    }
     async decodeAudioData(data, resolvecb, rejectcb) {
         if (resolvecb) {
             context.decodeAudioData(data, buffer => {
@@ -30,7 +36,6 @@ class AudioContext {
         }
     }
     createGain() { return context.createGain(...arguments); }
-    destination = context.destination;
     createBuffer() { return context.createBuffer(...arguments); }
     createBufferSource() { return context.createBufferSource(...arguments); }
 }
@@ -68,53 +73,61 @@ const document = {
     hasFocus() {
         return true
     },
+    createElementNS(ns, tag) {
+        tempFuncWrapper('HTMLElement.createElementNS', [...arguments]);
+        return this.createElement(tag)
+    },
     createElement(tag) {
-        if (tag !== 'canvas') {
+        if (tag !== 'canvas' && tag !== 'img') {
             throw new Error("unsupport tag: " + tag);
         }
-        const canvas = wx.createCanvas()
+        if (tag === "img") {
+            const img = wx.createImage();
+            // debugger
+            return img;
+        } else {
 
-        if (platform !== 'devtools') {
-            canvas.parentElement = {
-                offsetWidth: windowInfo.windowWidth,
-                offsetHeight: windowInfo.windowHeight
-            };
-            const tempFuncWrapper = function (name, args) {
-                console.warn(`${name} with ${args} is called in weapp!`)
-            }
-            canvas.removeEventListener = function () { tempFuncWrapper('HTMLElement.removeEventListener', [...arguments]); }
-            canvas.addEventListener = function () {
-                // tempFuncWrapper('HTMLElement.addEventListener', [...arguments]);
-                document.addEventListener(...arguments);
-            }
-            canvas.focus = function () {
-                tempFuncWrapper('HTMLElement.focus', [...arguments]);
-            }
-            const getCtx = canvas.getContext;
-            canvas.getContext = function () {
-                const ctx = getCtx.apply(canvas, arguments);
-                const measureText = ctx.measureText;
-                ctx.measureText = function () {
-                    const res = measureText.apply(ctx, arguments);
-                    res.fontBoundingBoxAscent = res.actualBoundingBoxAscent;
-                    res.fontBoundingBoxDescent = res.actualBoundingBoxDescent;
-                    return res;
+            const canvas = wx.createCanvas()
+
+            if (platform !== 'devtools') {
+                canvas.parentElement = {
+                    offsetWidth: windowInfo.windowWidth,
+                    offsetHeight: windowInfo.windowHeight
+                };
+                canvas.removeEventListener = function () { tempFuncWrapper('HTMLElement.removeEventListener', [...arguments]); }
+                canvas.addEventListener = function () {
+                    // tempFuncWrapper('HTMLElement.addEventListener', [...arguments]);
+                    document.addEventListener(...arguments);
                 }
-                return ctx;
-            }
-            canvas.getBoundingClientRect = function () {
-                return {
-                    x: 0,
-                    y: 0,
-                    top: 0,
-                    left: 0,
-                    width: windowInfo.windowWidth,
-                    height: windowInfo.windowHeight
+                canvas.focus = function () {
+                    tempFuncWrapper('HTMLElement.focus', [...arguments]);
+                }
+                const getCtx = canvas.getContext;
+                canvas.getContext = function () {
+                    const ctx = getCtx.apply(canvas, arguments);
+                    const measureText = ctx.measureText;
+                    ctx.measureText = function () {
+                        const res = measureText.apply(ctx, arguments);
+                        res.fontBoundingBoxAscent = res.actualBoundingBoxAscent;
+                        res.fontBoundingBoxDescent = res.actualBoundingBoxDescent;
+                        return res;
+                    }
+                    return ctx;
+                }
+                canvas.getBoundingClientRect = function () {
+                    return {
+                        x: 0,
+                        y: 0,
+                        top: 0,
+                        left: 0,
+                        width: windowInfo.windowWidth,
+                        height: windowInfo.windowHeight
+                    }
                 }
             }
+
+            return canvas
         }
-
-        return canvas
     },
     body: {
         clientWidth: windowInfo.windowWidth,
@@ -158,13 +171,14 @@ const document = {
 }
 
 class Blob {
-    buffer = null
     constructor([arrayBuffer]) {
         this.buffer = arrayBuffer
     }
 }
-function URL() {
-    throw new Error("Not implemented");
+function URL(url, url1) {
+    return {
+        href: url === "NotoSansSC-Bold.png" ? "resources/font/" + url : url
+    }
 }
 
 URL.createObjectURL = function (blob) {
@@ -266,6 +280,19 @@ const _window = {
         error: console.log
     },
     document,
+    WebAssembly: {
+        Instance: WXWebAssembly.Instance,
+        instantiate(path, imports) {
+            console.log(...arguments)
+            if (path.length < 1e5) {
+                return WXWebAssembly.instantiate("/resources/wasm/yoga-wasm-base64-esm.wasm", imports)
+            } else {
+                return WXWebAssembly.instantiate("/resources/wasm/rapier_wasm3d_bg.wasm", imports)
+            }
+        },
+        RuntimeError: Error
+    },
+    location: { href: "" },
     innerWidth: windowInfo.windowWidth,
     innerHeight: windowInfo.windowHeight,
     devicePixelRatio: windowInfo.pixelRatio,
