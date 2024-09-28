@@ -5,7 +5,7 @@ import { useBearStore } from '../state.js'
 
 
 
-import { OrbitControls, Torus } from "@react-three/drei";
+import { OrbitControls, PivotControls, Torus, TransformControls } from "@react-three/drei";
 import { Physics, RigidBody, CuboidCollider } from "@react-three/rapier";
 import { UIRoot } from './ui/UIRoot.js';
 
@@ -32,13 +32,14 @@ function Box(props: { position: Vector3 }) {
 export default function App() {
   return (
     <>
-      <OrbitControls></OrbitControls>
+      <OrbitControls makeDefault></OrbitControls>
       <ambientLight intensity={Math.PI / 2} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} decay={0} intensity={Math.PI} />
       <pointLight position={[-10, -10, -10]} decay={0} intensity={Math.PI} />
       <Box position={[-1.2, 0, 0]} />
-      <Box position={[1.2, 0, 0]} />
-
+      <PivotControls>
+        <Box position={[0, 0, 0]} />
+      </PivotControls>
       <Physics debug>
         <RigidBody colliders={"hull"} restitution={2}>
           <Torus />

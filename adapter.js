@@ -51,6 +51,7 @@ class FontFace {
         return Promise.resolve(this);
     }
 }
+
 const windowInfo = wx.getWindowInfo();
 const events = {}
 const document = {
@@ -78,14 +79,7 @@ const document = {
         return this.createElement(tag)
     },
     createElement(tag) {
-        if (tag !== 'canvas' && tag !== 'img') {
-            throw new Error("unsupport tag: " + tag);
-        }
-        if (tag === "img") {
-            const img = wx.createImage();
-            // debugger
-            return img;
-        } else {
+        if (tag === 'canvas') {
 
             const canvas = wx.createCanvas()
 
@@ -137,6 +131,28 @@ const document = {
             }
 
             return canvas
+        } else if (tag === "div") {
+            return {
+                style: {
+                  width: `${innerWidth}px`,
+                  height: `${innerHeight}px`
+                },
+                setAttribute(name, value) {
+                  this[name] = value
+                },
+                removeAttribute(name) {
+                  delete this[name];
+                },
+                getAttribute(name) {
+                  return this[name]
+                }
+            };
+        } else if (tag === "img") {
+            const img = wx.createImage();
+            // debugger
+            return img;
+        } else {
+            throw new Error("unsupport tag: " + tag);
         }
     },
     body: {
@@ -179,10 +195,10 @@ const document = {
         }
     },
     releasePointerCapture() {
-        tempFuncWrapper("document.releasePointerCapture", [...arguments])
+        // tempFuncWrapper("document.releasePointerCapture", [...arguments])
     },
     setPointerCapture() {
-        tempFuncWrapper("document.setPointerCapture", [...arguments])
+        // tempFuncWrapper("document.setPointerCapture", [...arguments])
     }
 }
 
@@ -221,6 +237,7 @@ function pointerEventHandlerFactory(type) {
                 offsetX: change.offsetX,
                 offsetY: change.offsetY,
                 pointerId: change.identifier,
+                target: document,
                 type,
                 pointerType: "touch"
             })
