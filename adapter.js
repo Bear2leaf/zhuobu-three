@@ -429,9 +429,6 @@ const _window = {
         if (typeof url === "object") {
             url = url.url
         }
-        if (url.endsWith(".js")) {
-            url = url.replace(".js", ".txt");
-        }
         return {
             ok: true,
             status: 200,

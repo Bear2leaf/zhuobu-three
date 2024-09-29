@@ -1,8 +1,8 @@
 {
-    "subpackages": [
-      {
-        "name": "resources",
-        "root": "resources"
-      }
-    ]
+  "subpackages": [
+    {
+      "name": "resources",
+      "root": "resources"
+    }
+  ]
 }
