@@ -4,8 +4,5 @@
     "module": "ESNext",
     "target": "ES2015",
     "moduleResolution": "Bundler",
-    "jsx": "react",
-    "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
   }
 }

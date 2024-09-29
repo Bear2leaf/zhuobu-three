@@ -5,25 +5,20 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "esbuild src/main.ts src/tw-to-css.ts src/prettier/plugins/estree.ts src/prettier/standalone.ts --outdir=dist --minify --bundle --format=cjs --target=es2015 --sourcemap --outdir=dist --external:tw-to-css --external:prettier",
-        "dev": "esbuild --sourcemap src/main.ts  --outdir=dist --bundle --format=esm --watch  --servedir=."
+        "build": "esbuild src/main.ts src/worker/main.ts --outdir=dist  --target=es2015 --platform=node --outdir=dist --bundle --format=esm",
+        "dev": "esbuild --sourcemap src/main.ts src/worker/main.ts --platform=node  --outdir=dist --bundle --format=esm --watch  --servedir=."
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "devDependencies": {
-        "@types/three": "^0.168.0",
+        "@types/three": "^0.169.0",
         "esbuild": "^0.21.5",
         "minigame-api-typings": "^3.8.4"
     },
     "dependencies": {
-        "@react-three/drei": "^9.114.0",
-        "@react-three/fiber": "^8.17.8",
-        "@react-three/rapier": "^1.4.0",
-        "@react-three/uikit": "^0.5.4",
-        "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "three": "^0.168.0",
-        "zustand": "^5.0.0-rc.2"
+        "@dimforge/rapier3d": "^0.14.0",
+        "@dimforge/rapier3d-compat": "^0.14.0",
+        "three": "^0.169.0"
     }
 }

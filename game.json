@@ -4,5 +4,6 @@
       "name": "resources",
       "root": "resources"
     }
-  ]
+  ],
+  "workers": "dist/worker"
 }

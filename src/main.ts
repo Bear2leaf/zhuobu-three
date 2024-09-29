@@ -1,4 +1,5 @@
 import Device from "./device/Device.js";
+import Engine from "./Engine.js";
 
 export async function mainH5() {
     const BrowserDevice = (await import("./device/BrowserDevice")).default;
@@ -11,30 +12,19 @@ export async function mainH5() {
 export async function mainMinigame() {
     const MinigameDevice = (await import("./device/MinigameDevice")).default;
     const device = new MinigameDevice();
-    await new Promise<null>(resolve => {
-        const task = wx.loadSubpackage({
-            name: "resources",
-            success(res: { errMsg: string }) {
-                console.debug("load resources success", res)
-                resolve(null);
-            },
-            fail(res: { errMsg: string }) {
-                console.error("load resources fail", res)
-            },
-            complete() {
-                console.debug("load resources complete");
-            }
-        })
-
-        task.onProgressUpdate((res) => {
-            console.debug(`onProgressUpdate: ${res.progress}, ${res.totalBytesExpectedToWrite}, ${res.totalBytesWritten}`)
-        })
-    });
+    await device.loadSubpackage();
     return device;
 }
 export async function start(device: Device) {
-    import("./Engine.js").then(m => {
-        console.log(new m.default(device))
-    })
+    const engine = new Engine(device);
+    device.onmessage = function(data) {
+        // console.log(...arguments)
+        if (data.type === "update" && data.objects.length) {
+            console.log(data.objects.length)
+        }
+    }
+    device.createWorker("dist/worker/main.js");
+    engine.sendMessage = device.sendmessage;
+    await engine.load();
 }
 

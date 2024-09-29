@@ -10,6 +10,7 @@ const startupTime = wx.getPerformance().now();
 const { platform } = wx.getDeviceInfo()
 const navigator = {
     platform,
+    userAgent: "",
     getGamepads() {
         return [];
     },
@@ -401,13 +402,15 @@ const _window = {
     },
     WebAssembly: {
         Instance: WXWebAssembly.Instance,
-        instantiate(path, imports) {
-            tempFuncWrapper("WebAssembly.instantiate", [...arguments, path.byteLength]);
-            if (path.byteLength === 9520) {
+        instantiate(url, imports) {
+            tempFuncWrapper("WebAssembly.instantiate", [...arguments, url.byteLength]);
+            if (typeof url === "string") {
+                return WXWebAssembly.instantiate(url, imports)
+            } else if (url.byteLength === 9520) {
                 return WXWebAssembly.instantiate("/resources/wasm/meshopt.wasm", imports)
-            } else if (path.byteLength === 76163) {
+            } else if (url.byteLength === 76163) {
                 return WXWebAssembly.instantiate("/resources/wasm/yoga-wasm-base64-esm.wasm", imports)
-            } else if (path.byteLength === 1452955) {
+            } else if (url.byteLength === 1439831) {
                 return WXWebAssembly.instantiate("/resources/wasm/rapier_wasm3d_bg.wasm", imports)
             } else {
                 throw new Error("unsupport wasm size")

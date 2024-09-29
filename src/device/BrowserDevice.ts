@@ -1,5 +1,7 @@
+import type { MainMessage, WorkerMessage } from "../worker/ammo.worker.js";
 import Device from "./Device";
 export default class BrowserDevice implements Device {
+    private worker?: Worker;
     private readonly windowInfo: WechatMinigame.WindowInfo;
     private readonly canvasGL: HTMLCanvasElement
     constructor() {
@@ -23,18 +25,49 @@ export default class BrowserDevice implements Device {
                 width: this.canvasGL.width
             },
             screenTop: 0
-        };
+        };;
+    }
+    getParam(name: string): string {
+        const query = window.location.search.substring(1);
+        const vars = query.split("&");
+        for (let i = 0; i < vars.length; i++) {
+            const pair = vars[i].split("=");
+            if (pair[0] === name) {
+                return pair[1];
+            }
+        }
+        return "";
     }
     getCanvasGL(): HTMLCanvasElement {
         return this.canvasGL;
     }
-    getWindowInfo(): WechatMinigame.WindowInfo {
+    getWindowInfo(){
         return this.windowInfo
+    }
+    now(): number {
+        return performance.now();
     }
     async loadSubpackage() {
         return null;
     }
     createWebAudioContext(): AudioContext {
         return new AudioContext();
+    }
+    createWorker(url: string): void {
+        if (this.worker) {
+            this.worker.terminate();
+        }
+        if (!this.onmessage) {
+            throw new Error("onmessage not set");
+        }
+        this.worker = new Worker(url);
+        this.worker.onmessage = (e: MessageEvent) => this.onmessage && this.onmessage(e.data);
+        this.sendmessage = this.worker!.postMessage.bind(this.worker)
+    }
+    onaccelerometerchange?: ((x: number, y: number, z: number) => void) | undefined;
+    onmessage: (message: WorkerMessage) => void = () => { throw new Error("Worker not inited") };
+    sendmessage: (message: MainMessage) => void = () => { throw new Error("Worker not inited") };
+    terminateWorker(): void {
+        this.worker?.terminate();
     }
 }
