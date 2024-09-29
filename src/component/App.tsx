@@ -4,7 +4,7 @@ import { Mesh } from 'three'
 import { useBearStore } from '../state.js'
 
 
-import { Experience } from './tps/Experience.js';
+import { Experience } from './game/Experience.js';
 
 function Box(props: { position: Vector3 }) {
   const mesh = useRef<Mesh>(null)

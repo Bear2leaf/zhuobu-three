@@ -8,7 +8,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 
 export function Character({ animation, ...props }: { animation: string, scale: number }) {
   const group = useRef(null);
-  const { nodes, materials, animations } = useGLTF("/resources/models/character.glb", false, false) as any;
+  const { nodes, materials, animations } = useGLTF("/resources/models/character.glb", false) as any;
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
     const action = actions[animation];

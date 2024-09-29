@@ -3,7 +3,7 @@ import { useAnimations, useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
 export function GameMap({ model, ...props }: { model: string, scale: number, position: [number, number, number] }) {
-  const { scene, animations } = useGLTF(model, false, false);
+  const { scene, animations } = useGLTF(model, false);
   const group = useRef();
   const { actions } = useAnimations(animations, group);
   useEffect(() => {
