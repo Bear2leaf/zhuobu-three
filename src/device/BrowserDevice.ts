@@ -31,9 +31,6 @@ export default class BrowserDevice implements Device {
     getWindowInfo(): WechatMinigame.WindowInfo {
         return this.windowInfo
     }
-    now(): number {
-        return performance.now();
-    }
     async loadSubpackage() {
         return null;
     }

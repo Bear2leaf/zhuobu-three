@@ -5,16 +5,12 @@ import Device from "./Device";
 export default class MinigameDevice implements Device {
     private readonly windowInfo: WechatMinigame.WindowInfo;
     private readonly canvasGL: HTMLCanvasElement
-    private readonly divideTimeBy: number;
-    private startupTime: number = wx.getPerformance().now();
     constructor() {
         this.canvasGL = document.createElement("canvas");
         const info = wx.getWindowInfo();
         (this.canvasGL.width) = info.windowWidth;
         (this.canvasGL.height) = info.windowHeight;
         this.windowInfo = wx.getWindowInfo()
-        const isDevTool = wx.getDeviceInfo().platform === "devtools";
-        this.divideTimeBy = isDevTool ? 1 : 1000;
 
     }
     getWindowInfo(): WechatMinigame.WindowInfo {
@@ -22,9 +18,6 @@ export default class MinigameDevice implements Device {
     }
     getCanvasGL(): HTMLCanvasElement {
         return this.canvasGL as unknown as HTMLCanvasElement;
-    }
-    now(): number {
-        return (wx.getPerformance().now() - this.startupTime) / this.divideTimeBy;
     }
     async loadSubpackage() {
         return await new Promise<null>(resolve => {
