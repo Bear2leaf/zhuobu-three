@@ -80,7 +80,7 @@ export const CharacterController = () => {
           movement.x = -pointer.x;
         }
         movement.z = pointer.y + 0.2;
-        if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.5) {
+        if (Math.abs(movement.x) > 0.5 || Math.abs(movement.z) > 0.25) {
           speed = RUN_SPEED;
         }
       }
