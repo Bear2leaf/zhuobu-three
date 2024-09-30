@@ -18,10 +18,7 @@ export async function mainMinigame() {
 export async function start(device: Device) {
     const engine = new Engine(device);
     device.onmessage = function(data) {
-        // console.log(...arguments)
-        if (data.type === "update" && data.objects.length) {
-            console.log(data.objects.length)
-        }
+        engine.onMessage(data);
     }
     device.createWorker("dist/worker/main.js");
     engine.sendMessage = device.sendmessage;

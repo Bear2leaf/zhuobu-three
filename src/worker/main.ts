@@ -26,7 +26,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     const overlappingPairCache = new Ammo.btDbvtBroadphase();
     const solver = new Ammo.btSequentialImpulseConstraintSolver();
     const dynamicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
-    dynamicsWorld.setGravity(new Ammo.btVector3(0, -10, 0));
+    dynamicsWorld.setGravity(new Ammo.btVector3(0, -1, 0));
 
     const collisionSetPrev = new Set<string>();
     const collisionSet = new Set<string>();
@@ -45,7 +45,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         startTransform.setIdentity();
         const mass = 1;
         const localInertia = new Ammo.btVector3(0, 0, 0);
-        const sphereShape = new Ammo.btSphereShape(8);
+        const sphereShape = new Ammo.btSphereShape(1);
         sphereShape.calculateLocalInertia(mass, localInertia);
 
         const myMotionState = new Ammo.btDefaultMotionState(startTransform);
@@ -130,7 +130,12 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             } else {
                 newVertices.push(...vertices);
             }
-            startTransform.setFromOpenGLMatrix(transform);
+            const scaleX = transform[7];
+            const scaleY = transform[8];
+            const scaleZ = transform[9];
+            const scale = new Ammo.btVector3(scaleX, scaleY, scaleZ);
+            startTransform.setOrigin(new Ammo.btVector3(transform[0], transform[1], transform[2]))
+            startTransform.setRotation(new Ammo.btQuaternion(transform[3], transform[4], transform[5], transform[6]))
             let shape
             const myMotionState = new Ammo.btDefaultMotionState(startTransform);
 
@@ -146,6 +151,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             } else {
                 const mesh = new Ammo.btTriangleMesh();
 
+                mesh.setScaling(scale)
                 for (let i = 0; i < newVertices.length / 9; i++) {
                     vertex0.setValue(newVertices[i * 9 + 0], newVertices[i * 9 + 1], newVertices[i * 9 + 2]);
                     vertex1.setValue(newVertices[i * 9 + 3], newVertices[i * 9 + 4], newVertices[i * 9 + 5]);
@@ -207,7 +213,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
 
     }
     handler.onmessage = function (message) {
-        console.log(message)
         messageHandler(message);
     }
     function prepareCollision() {
