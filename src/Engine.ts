@@ -58,9 +58,5 @@ export default class Engine {
         }
     }
     private data?: GLTF;
-    async load() {
-        const loader = new GLTFLoader();
-        this.data = await loader.loadAsync("resources/models/terrain.glb");
-    }
 }
 
