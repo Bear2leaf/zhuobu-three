@@ -5,8 +5,8 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "esbuild src/main.ts src/tw-to-css.ts src/prettier/plugins/estree.ts src/prettier/standalone.ts --outdir=dist --minify --bundle --format=cjs --target=es2015 --sourcemap --outdir=dist --external:tw-to-css --external:prettier --external:react-dom",
-        "dev": "esbuild --sourcemap src/main.ts --external:react-dom  --outdir=dist --bundle --format=esm --watch  --servedir=."
+        "build": "esbuild src/main.ts  src/worker/main.ts src/tw-to-css.ts src/prettier/plugins/estree.ts src/prettier/standalone.ts --outdir=dist  --bundle --format=cjs --target=es2015 --sourcemap --external:tw-to-css --external:fs --external:path --external:prettier --external:react-dom",
+        "dev": "esbuild  src/main.ts  src/worker/main.ts src/tw-to-css.ts src/prettier/plugins/estree.ts src/prettier/standalone.ts  --servedir=. --watch --outdir=dist  --bundle --format=esm --target=es2015 --sourcemap --external:tw-to-css --external:fs --external:path --external:prettier --external:react-dom"
     },
     "keywords": [],
     "author": "",

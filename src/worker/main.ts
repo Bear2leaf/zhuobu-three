@@ -11,11 +11,13 @@ enum CollisionFlags {
     CF_DISABLE_SPU_COLLISION_PROCESSING = 64//disable parallel/SPU processing
 };
 
-
 Ammo.bind(Module)(config).then(function (Ammo) {
     class UserData extends Ammo.btVector3 {
         propertities?: Record<string, boolean>
         name?: string
+    }
+    handler.onmessage = function (message) {
+        messageHandler(message);
     }
     handler.postMessage({ type: "ready" });
     const DISABLE_DEACTIVATION = 4;
@@ -211,9 +213,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         body.setLinearVelocity(tempVec);
         body.setAngularVelocity(tempVec);
 
-    }
-    handler.onmessage = function (message) {
-        messageHandler(message);
     }
     function prepareCollision() {
         collisionSetPrev.clear();

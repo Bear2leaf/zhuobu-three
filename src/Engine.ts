@@ -1,15 +1,15 @@
 
 import * as THREE from 'three';
-import Device from './device/Device.js';
 import { GLTF, GLTFLoader } from 'three/examples/jsm/Addons.js';
 import { MainMessage, WorkerMessage } from './worker/ammo.worker.js';
 import { extend, createRoot, events } from '@react-three/fiber';
 import App from './component/App.js';
 export default class Engine {
-    sendMessage?: (message: MainMessage) => void;
-    constructor(device: Device) {
+    constructor() {
         extend(THREE);
-        const root = createRoot(device.getCanvasGL());
+        const canvas = document.createElement("canvas");
+        document.body.appendChild(canvas)
+        const root = createRoot(canvas);
         // Configure the root, inject events optionally, set camera, etc
         root.configure({
             events,
@@ -18,8 +18,9 @@ export default class Engine {
             shadows: true
         })
 
-        root.render(App())
+        root.render(App(this))
     }
+    sendMessage?: (message: MainMessage) => void;
     onMessage(message: WorkerMessage) {
         if (message.type === "ready" && this.data) {
             this.sendMessage && this.sendMessage({

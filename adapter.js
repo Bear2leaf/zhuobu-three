@@ -362,6 +362,19 @@ class ImageData {
         return imageData;
     }
 }
+class Worker {
+    constructor(url, options) {
+        const worker = this.worker = wx.createWorker(url, options);
+        worker.onProcessKilled(() => {
+            console.log("woker is been killed");
+        });
+        worker.onMessage((message) => {
+            this.onmessage({data: message})
+        })
+        this.postMessage = worker.postMessage.bind(worker)
+    }
+    onmessage = null;
+}
 const _window = {
     Image,
     AudioContext,
@@ -373,6 +386,7 @@ const _window = {
     TextDecoder,
     Headers,
     navigator,
+    Worker,
     Blob,
     style: {
         width: windowInfo.windowWidth,
@@ -495,3 +509,17 @@ if (!GameGlobal.__isAdapterInjected) {
     GameGlobal.__isAdapterInjected = true
     inject()
 }
+
+wx.loadSubpackage({
+    name: "resources",
+    success(res) {
+        console.debug("load resources success", res)
+        document.dispatchEvent({ type: "load" })
+    },
+    fail(res) {
+        console.error("load resources fail", res)
+    },
+    complete() {
+        console.debug("load resources complete");
+    }
+});

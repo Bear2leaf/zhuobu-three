@@ -3,10 +3,15 @@ import React, { act, useRef, useState } from 'react'
 
 import { Experience } from './game/Experience.js';
 import { OrbitControls } from '@react-three/drei';
-export default function App() {
+import Engine from '../Engine.js';
+import { PhysicsProvider } from './physics/PhysicsProvider.js';
+export default function App(engine: Engine) {
   return (
     <>
-      <Experience></Experience>
+      <PhysicsProvider >
+        <Experience></Experience>
+      </PhysicsProvider>
+
       {/* <UIRoot></UIRoot> */}
     </>
   )
