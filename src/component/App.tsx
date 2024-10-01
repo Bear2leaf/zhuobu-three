@@ -4,14 +4,10 @@ import React, { act, useRef, useState } from 'react'
 import { Experience } from './game/Experience.js';
 import { OrbitControls } from '@react-three/drei';
 import Engine from '../Engine.js';
-import { PhysicsProvider } from './physics/PhysicsProvider.js';
-export default function App(engine: Engine) {
+export default function App() {
   return (
     <>
-      <PhysicsProvider >
-        <Experience></Experience>
-      </PhysicsProvider>
-
+      <Experience></Experience>
       {/* <UIRoot></UIRoot> */}
     </>
   )

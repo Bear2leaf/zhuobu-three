@@ -18,7 +18,7 @@ export default class Engine {
             shadows: true
         })
 
-        root.render(App(this))
+        root.render(App())
     }
     sendMessage?: (message: MainMessage) => void;
     onMessage(message: WorkerMessage) {

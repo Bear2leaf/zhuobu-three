@@ -10,19 +10,16 @@ enum CollisionFlags {
     CF_DISABLE_VISUALIZE_OBJECT = 32, //disable debug drawing
     CF_DISABLE_SPU_COLLISION_PROCESSING = 64//disable parallel/SPU processing
 };
+const DISABLE_DEACTIVATION = 4;
+const initQueue: MainMessage[] = []
+handler.onmessage = function (message) {
+    initQueue.push(message);
+}
 
 Ammo.bind(Module)(config).then(function (Ammo) {
-    class UserData extends Ammo.btVector3 {
-        propertities?: Record<string, boolean>
-        name?: string
-    }
-    handler.onmessage = function (message) {
-        messageHandler(message);
-    }
-    handler.postMessage({ type: "ready" });
-    const DISABLE_DEACTIVATION = 4;
     // Bullet-interfacing code
 
+    handler.postMessage({ type: "ready" });
     const collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
     const dispatcher = new Ammo.btCollisionDispatcher(collisionConfiguration);
     const overlappingPairCache = new Ammo.btDbvtBroadphase();
@@ -42,18 +39,36 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         q: { x: number, y: number, z: number, w: number }
     }[] = []
     const bodies: Ammo.btRigidBody[] = [];
+    const transform = new Ammo.btTransform(); // taking this out of readBulletObject reduces the leaking
+
+    class UserData extends Ammo.btVector3 {
+        propertities?: Record<string, boolean>
+        name?: string
+    }
+    const gravity = new Ammo.btVector3(0, 0, 0);
+    let interval: number | null = null;
+    const vertex0 = new Ammo.btVector3;
+    const vertex1 = new Ammo.btVector3;
+    const vertex2 = new Ammo.btVector3;
+    createBall();
+    for (const message of initQueue) {
+        messageHandler(message);
+    }
+    handler.onmessage = function (message) {
+        messageHandler(message);
+    }
     function createBall() {
         const startTransform = new Ammo.btTransform();
         startTransform.setIdentity();
         const mass = 1;
         const localInertia = new Ammo.btVector3(0, 0, 0);
-        const sphereShape = new Ammo.btSphereShape(1);
+        const sphereShape = new Ammo.btCapsuleShape(0.08, 0.15);
         sphereShape.calculateLocalInertia(mass, localInertia);
 
         const myMotionState = new Ammo.btDefaultMotionState(startTransform);
         const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, sphereShape, localInertia);
         const body = new Ammo.btRigidBody(rbInfo);
-        body.setActivationState(DISABLE_DEACTIVATION);
+        body.setAngularFactor(new Ammo.btVector3());
         const v = new UserData;
         v.propertities = {
             ball: true
@@ -63,8 +78,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         dynamicsWorld.addRigidBody(body);
         bodies.push(body);
     };
-    const transform = new Ammo.btTransform(); // taking this out of readBulletObject reduces the leaking
-
     function readBulletObject(i: number, object: [number, number, number, number, number, number, number, string]) {
         const body = bodies[i];
         body.getMotionState().getWorldTransform(transform);
@@ -78,27 +91,8 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         object[5] = rotation.z();
         object[6] = rotation.w();
         const data = Ammo.castObject(body.getUserPointer(), UserData);
-
         object[7] = data.name!;
     }
-    function resetWorld() {
-        while (bodies.length > 1) {
-            const removed = bodies.pop()!;
-            dynamicsWorld.removeRigidBody(removed);
-        }
-        if (bodies.length === 0) {
-            createBall();
-        }
-        handler.postMessage({
-            type: "requestLevel",
-        })
-        pause = true;
-    }
-    const gravity = new Ammo.btVector3(0, 0, 0);
-    let interval: number | null = null;
-    const vertex0 = new Ammo.btVector3;
-    const vertex1 = new Ammo.btVector3;
-    const vertex2 = new Ammo.btVector3;
     function messageHandler(message: MainMessage) {
         if (message.type === "updateGravity") {
             const g = message.data.split(",").map(x => parseFloat(x));
@@ -108,14 +102,18 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             dynamicsWorld.setGravity(gravity);
             return;
         } else if (message.type === "addBall") {
-            const state = bodies[0].getMotionState();
-            transform.setFromOpenGLMatrix(message.data.transform)
-            state.setWorldTransform(transform);
-            bodies[0].setMotionState(state);
+            const body = bodies.find(body => Ammo.castObject(body.getUserPointer(), UserData).name === "Ball");
+            if (body === undefined) {
+                throw new Error("ball body is undefined")
+            }
+            const startTransform = new Ammo.btTransform();
+            startTransform.setFromOpenGLMatrix(message.data.transform);
+            const state = new Ammo.btDefaultMotionState(startTransform);
+            state.setWorldTransform(startTransform);
+            body.setMotionState(state);
         } else if (message.type === "addMesh") {
             const startTransform = new Ammo.btTransform();
             startTransform.setIdentity();
-
             const mass = 0;
             const localInertia = new Ammo.btVector3(0, 0, 0);
             const transform = message.data.transform;
@@ -172,7 +170,10 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             dynamicsWorld.addRigidBody(body);
             bodies.push(body);
         } else if (message.type === "resetWorld") {
-            resetWorld();
+            handler.postMessage({
+                type: "requestLevel",
+            })
+            pause = true;
         } else if (message.type === "release") {
             pause = false;
         } else if (message.type === "pause") {

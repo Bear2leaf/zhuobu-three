@@ -130,7 +130,6 @@ export const CharacterController = () => {
         camera.lookAt(cameraLookAt.current);
       }
     });
-
     return (
         <group ref={container}>
           <group ref={cameraTarget} position-z={1.5} />
