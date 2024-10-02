@@ -90,7 +90,6 @@ export const CharacterController = () => {
             if (movement.x !== 0) {
                 rotationTarget.current += ROTATION_SPEED * movement.x;
             }
-
             if (movement.x !== 0 || movement.z !== 0) {
                 characterRotationTarget.current = Math.atan2(movement.x, movement.z);
                 vel.x =
@@ -112,7 +111,6 @@ export const CharacterController = () => {
                 characterRotationTarget.current,
                 0.1
             );
-
             rb.current.setLinvel && rb.current.setLinvel(vel);
 
             // CAMERA
@@ -139,7 +137,7 @@ export const CharacterController = () => {
                 <group ref={cameraTarget} position-z={1.5} />
                 <group ref={cameraPosition} position-y={4} position-z={-4} />
                 <group ref={character}>
-                    <Character scale={0.18} position-y={-0.15} animation={animation} />
+                    <Character scale={0.25} position-y={-0.35} animation={animation} />
                 </group>
             </group>
         </group>

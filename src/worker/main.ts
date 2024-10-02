@@ -1,4 +1,5 @@
 import Ammo, { config, Module, handler, MainMessage, WorkerMessage } from "./ammo.worker.js"
+import { SnapshotInterpolation } from '@geckos.io/snapshot-interpolation'
 
 
 enum CollisionFlags {
@@ -15,6 +16,8 @@ const initQueue: MainMessage[] = []
 handler.onmessage = function (message) {
     initQueue.push(message);
 }
+
+
 
 Ammo.bind(Module)(config).then(function (Ammo) {
     // Bullet-interfacing code
@@ -53,9 +56,9 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     function createBall() {
         const startTransform = new Ammo.btTransform();
         startTransform.setIdentity();
-        const mass = 10;
-        const localInertia = new Ammo.btVector3(0, 0, 0);
-        const sphereShape = new Ammo.btCapsuleShape(0.08, 0.15);
+        const mass = 1;
+        const localInertia = new Ammo.btVector3(1, 1, 1);
+        const sphereShape = new Ammo.btCapsuleShape(0.8 * 0.25, 1.5 * 0.25);
         sphereShape.calculateLocalInertia(mass, localInertia);
 
         const myMotionState = new Ammo.btDefaultMotionState(startTransform);
@@ -70,7 +73,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         body.setUserPointer(v)
         dynamicsWorld.addRigidBody(body);
         bodies.push(body);
-        body.setActivationState(DISABLE_DEACTIVATION)
     };
     function readBulletObject(i: number, object: [number, number, number, number, number, number, number, string, number, number, number]) {
         const body = bodies[i];
@@ -210,6 +212,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         }
         tempVec.setValue(x, y, z);
         body.setLinearVelocity(tempVec);
+        body.activate();
 
     }
     function prepareCollision() {
@@ -316,7 +319,21 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         for (let i = 0; i < bodies.length; i++) {
             result.objects[i] = result.objects[i] || []
             readBulletObject(i, result.objects[i]);
-
+            if (result.objects[i][7] === "Ball") {
+                // create a snapshot of the current world
+                const snapshot = SI.snapshot.create([
+                    {
+                        id: "Ball",
+                        x: result.objects[i][0],
+                        y: result.objects[i][1],
+                        z: result.objects[i][2],
+                    }
+                ])
+                handler.postMessage({
+                    type: "updateSI",
+                    snapshot
+                });
+            }
         }
         handler.postMessage(result);
         prepareCollision();
@@ -325,7 +342,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     frame = 1;
     meanDt = meanDt2 = 0;
 
-
+    const SI = new SnapshotInterpolation()
     let last = Date.now();
     function mainLoop() {
         const now = Date.now();
@@ -335,5 +352,5 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     }
 
     if (interval) clearInterval(interval);
-    interval = setInterval(mainLoop, 1000 / 60);
+    interval = setInterval(mainLoop, 1000 / 50);
 });
