@@ -44,7 +44,7 @@ export type MainMessage = {
 }
 export type WorkerMessage = {
     type: "update"
-    objects: [number, number, number, number, number, number, number, string][];
+    objects: [number, number, number, number, number, number, number, string, number, number, number][];
 } | {
     type: "ready",
 } | {

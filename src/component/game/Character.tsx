@@ -7,8 +7,7 @@ import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ObjectMap } from "@react-three/fiber";
 
 export function Character({ animation, ...props }: { animation: string, scale: number }) {
-  // const group = useRef(null);
-  const group = usePhysicsCharacter(props);
+  const group = useRef(null);
   const { nodes, materials, animations } = useGLTF("/resources/models/character.glb", false) as unknown as GLTF & ObjectMap & {
     nodes: Record<string, SkinnedMesh>;
   };

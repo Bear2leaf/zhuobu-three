@@ -21,18 +21,36 @@ worker.onmessage = (message) => {
         });
     }
 }
-export const usePhysicsCharacter = (props: { scale: number }) => {
-    const ref = useRef<Group>(null)
-    const { scale } = props;
+export const usePhysicsCharacter = () => {
+    const ref = useRef<Group & { linvel?: () => Vector3, setLinvel?: (value: Vector3) => void }>(null)
+    const tempVec = new Vector3();
     useEffect(() => {
         // Call function so the user can add shapes, positions, etc. to the body
         if (ref.current) {
 
+            ref.current.setLinvel = (value) => {
+                worker.postMessage({
+                    type: "updateVelocity",
+                    data: {
+                        name: "Ball",
+                        x: value.x,
+                        y: value.y,
+                        z: value.z,
+                    }
+                })
+            }
+            ref.current.linvel = () => {
+                const ball = objects.find(o => o[7] === "Ball");
+                if(ball) {
+                    tempVec.set(ball[8], ball[9], ball[10])
+                }
+                return tempVec;
+            }
             worker.postMessage({
                 type: "addBall",
                 data: {
                     transform: ref.current.matrix.toArray()
-    
+
                 }
             })
         }

@@ -25,19 +25,12 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     const overlappingPairCache = new Ammo.btDbvtBroadphase();
     const solver = new Ammo.btSequentialImpulseConstraintSolver();
     const dynamicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
-    dynamicsWorld.setGravity(new Ammo.btVector3(0, -1, 0));
+    dynamicsWorld.setGravity(new Ammo.btVector3(0, -10, 0));
 
+    const tempVec = new Ammo.btVector3;
     const collisionSetPrev = new Set<string>();
     const collisionSet = new Set<string>();
     let pause = true;
-    // the worldState on the server
-    const worldState: {
-        id: string,
-        x: number,
-        y: number,
-        z: number,
-        q: { x: number, y: number, z: number, w: number }
-    }[] = []
     const bodies: Ammo.btRigidBody[] = [];
     const transform = new Ammo.btTransform(); // taking this out of readBulletObject reduces the leaking
 
@@ -60,7 +53,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     function createBall() {
         const startTransform = new Ammo.btTransform();
         startTransform.setIdentity();
-        const mass = 1;
+        const mass = 10;
         const localInertia = new Ammo.btVector3(0, 0, 0);
         const sphereShape = new Ammo.btCapsuleShape(0.08, 0.15);
         sphereShape.calculateLocalInertia(mass, localInertia);
@@ -77,8 +70,9 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         body.setUserPointer(v)
         dynamicsWorld.addRigidBody(body);
         bodies.push(body);
+        body.setActivationState(DISABLE_DEACTIVATION)
     };
-    function readBulletObject(i: number, object: [number, number, number, number, number, number, number, string]) {
+    function readBulletObject(i: number, object: [number, number, number, number, number, number, number, string, number, number, number]) {
         const body = bodies[i];
         body.getMotionState().getWorldTransform(transform);
         const origin = transform.getOrigin();
@@ -92,6 +86,10 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         object[6] = rotation.w();
         const data = Ammo.castObject(body.getUserPointer(), UserData);
         object[7] = data.name!;
+        const velocity = body.getLinearVelocity();
+        object[8] = velocity.x();
+        object[9] = velocity.y();
+        object[10] = velocity.z();
     }
     function messageHandler(message: MainMessage) {
         if (message.type === "updateGravity") {
@@ -212,7 +210,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         }
         tempVec.setValue(x, y, z);
         body.setLinearVelocity(tempVec);
-        body.setAngularVelocity(tempVec);
 
     }
     function prepareCollision() {
@@ -260,7 +257,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     }
     let meanDt = 0, meanDt2 = 0, frame = 1;
     const result: WorkerMessage & { type: "update" } = { type: "update", objects: [] };
-    const tempVec = new Ammo.btVector3;
     function updateBodyCollision(name: string, enable: boolean) {
         const body = bodies.find(body => Ammo.castObject(body.getUserPointer(), UserData).name === name);
         if (body === undefined) {
@@ -279,17 +275,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             for (let i = 0; i < bodies.length; i++) {
                 result.objects[i] = result.objects[i] || []
                 readBulletObject(i, result.objects[i]);
-                worldState[i] = worldState[i] || {}
-                worldState[i].id = result.objects[i][7];
-                worldState[i].x = result.objects[i][0];
-                worldState[i].y = result.objects[i][1];
-                worldState[i].z = result.objects[i][2];
-                worldState[i].q = {
-                    x: result.objects[i][3]
-                    , y: result.objects[i][4]
-                    , z: result.objects[i][5]
-                    , w: result.objects[i][6]
-                };
 
             }
             handler.postMessage(result);
@@ -331,17 +316,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         for (let i = 0; i < bodies.length; i++) {
             result.objects[i] = result.objects[i] || []
             readBulletObject(i, result.objects[i]);
-            worldState[i] = worldState[i] || {}
-            worldState[i].id = result.objects[i][7];
-            worldState[i].x = result.objects[i][0];
-            worldState[i].y = result.objects[i][1];
-            worldState[i].z = result.objects[i][2];
-            worldState[i].q = {
-                x: result.objects[i][3]
-                , y: result.objects[i][4]
-                , z: result.objects[i][5]
-                , w: result.objects[i][6]
-            };
 
         }
         handler.postMessage(result);
