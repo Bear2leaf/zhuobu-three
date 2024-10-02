@@ -56,13 +56,14 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         const startTransform = new Ammo.btTransform();
         startTransform.setIdentity();
         const mass = 1;
-        const localInertia = new Ammo.btVector3(1, 1, 1);
+        const localInertia = new Ammo.btVector3(0, 0, 0);
         const sphereShape = new Ammo.btCapsuleShape(0.8 * 0.25, 1.5 * 0.25);
         sphereShape.calculateLocalInertia(mass, localInertia);
 
         const myMotionState = new Ammo.btDefaultMotionState(startTransform);
         const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, sphereShape, localInertia);
         const body = new Ammo.btRigidBody(rbInfo);
+        body.setFriction(1)
         body.setAngularFactor(new Ammo.btVector3());
         const v = new UserData;
         v.propertities = {
@@ -162,6 +163,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             shape.calculateLocalInertia(mass, localInertia);
             const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, shape, localInertia);
             const body = new Ammo.btRigidBody(rbInfo);
+            body.setFriction(1)
             if (v.propertities?.dynamic) {
                 body.setCollisionFlags(body.getCollisionFlags() | CollisionFlags.CF_KINEMATIC_OBJECT)
             }
