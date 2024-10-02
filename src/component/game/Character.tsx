@@ -1,7 +1,6 @@
 
 import React, { useEffect, useRef } from "react";
 import { useAnimations, useGLTF } from "@react-three/drei";
-import { usePhysicsCharacter } from "../physics/PhysicsProvider.js";
 import { Mesh, SkinnedMesh } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ObjectMap } from "@react-three/fiber";

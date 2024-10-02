@@ -33,8 +33,8 @@ export const CharacterController = () => {
         RUN_SPEED: 1.6,
         ROTATION_SPEED: degToRad(0.5)
     };
-    // const container = useRef<Group>(null!);
-    const container = usePhysicsCharacter();
+    const rb = usePhysicsCharacter();
+    const container = useRef<Group>(null!);
 
     const character = useRef<Group>(null!);
 
@@ -65,9 +65,9 @@ export const CharacterController = () => {
     }, []);
 
     useFrame(({ camera, pointer }) => {
-        if (container.current) {
+        if (rb.current) {
 
-            const vel = container.current.linvel ? container.current.linvel(): new Vector3();
+            const vel = rb.current.linvel ? rb.current.linvel() : new Vector3();
             const movement = {
                 x: 0,
                 z: 0,
@@ -113,7 +113,7 @@ export const CharacterController = () => {
                 0.1
             );
 
-            container.current.setLinvel && container.current.setLinvel(vel);
+            rb.current.setLinvel && rb.current.setLinvel(vel);
 
             // CAMERA
             container.current.rotation.y = MathUtils.lerp(
@@ -134,11 +134,13 @@ export const CharacterController = () => {
         }
     });
     return (
-        <group ref={container}>
-            <group ref={cameraTarget} position-z={1.5} />
-            <group ref={cameraPosition} position-y={4} position-z={-4} />
-            <group ref={character}>
-                <Character scale={0.18} position-y={-0.15} animation={animation} />
+        <group ref={rb}>
+            <group ref={container}>
+                <group ref={cameraTarget} position-z={1.5} />
+                <group ref={cameraPosition} position-y={4} position-z={-4} />
+                <group ref={character}>
+                    <Character scale={0.18} position-y={-0.15} animation={animation} />
+                </group>
             </group>
         </group>
     );
