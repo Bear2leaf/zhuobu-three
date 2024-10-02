@@ -1,5 +1,4 @@
 import Ammo, { config, Module, handler, MainMessage, WorkerMessage } from "./ammo.worker.js"
-import { SnapshotInterpolation } from '@geckos.io/snapshot-interpolation'
 
 
 enum CollisionFlags {
@@ -11,7 +10,6 @@ enum CollisionFlags {
     CF_DISABLE_VISUALIZE_OBJECT = 32, //disable debug drawing
     CF_DISABLE_SPU_COLLISION_PROCESSING = 64//disable parallel/SPU processing
 };
-const DISABLE_DEACTIVATION = 4;
 const initQueue: MainMessage[] = []
 handler.onmessage = function (message) {
     initQueue.push(message);
@@ -30,6 +28,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     const dynamicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
     dynamicsWorld.setGravity(new Ammo.btVector3(0, -10, 0));
 
+    const result: WorkerMessage & { type: "update" } = { type: "update", objects: [] };
     const tempVec = new Ammo.btVector3;
     const collisionSetPrev = new Set<string>();
     const collisionSet = new Set<string>();
@@ -203,6 +202,8 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             updateBodyCollision(message.data, true);
         } else if (message.type === "disableMesh") {
             updateBodyCollision(message.data, false);
+        } else if (message.type === "tick") {
+            simulate(message.data);
         }
     }
     function updateVelocity({ name, x, y, z }: (MainMessage & { type: "updateVelocity" })["data"]) {
@@ -258,8 +259,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             }
         }
     }
-    let meanDt = 0, meanDt2 = 0, frame = 1;
-    const result: WorkerMessage & { type: "update" } = { type: "update", objects: [] };
     function updateBodyCollision(name: string, enable: boolean) {
         const body = bodies.find(body => Ammo.castObject(body.getUserPointer(), UserData).name === name);
         if (body === undefined) {
@@ -283,17 +282,13 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             handler.postMessage(result);
             return;
         }
-        dt = dt || 1;
-        dynamicsWorld.stepSimulation(dt, 2);
-
-
+        dynamicsWorld.stepSimulation(dt);
         {
 
             for (const body of bodies) {
                 const props = Ammo.castObject(body.getUserPointer(), UserData).propertities;
                 if (props && props.dynamic) {
                     const state = body.getMotionState();
-                    tempVec.setValue(5 * Math.sin(frame / 100), -5, 0)
                     transform.setOrigin(tempVec)
                     state.setWorldTransform(transform)
                     body.setMotionState(state);
@@ -301,56 +296,15 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             }
         }
 
-        let alpha;
-        if (meanDt > 0) {
-            alpha = Math.min(0.1, dt / 1000);
-        } else {
-            alpha = 0.1; // first run
-        }
-        meanDt = alpha * dt + (1 - alpha) * meanDt;
-
-        const alpha2 = 1 / frame++;
-        meanDt2 = alpha2 * dt + (1 - alpha2) * meanDt2;
-
-
-
 
         // Read bullet data into JS objects
         for (let i = 0; i < bodies.length; i++) {
             result.objects[i] = result.objects[i] || []
             readBulletObject(i, result.objects[i]);
-            if (result.objects[i][7] === "Ball") {
-                // create a snapshot of the current world
-                const snapshot = SI.snapshot.create([
-                    {
-                        id: "Ball",
-                        x: result.objects[i][0],
-                        y: result.objects[i][1],
-                        z: result.objects[i][2],
-                    }
-                ])
-                handler.postMessage({
-                    type: "updateSI",
-                    snapshot
-                });
-            }
         }
         handler.postMessage(result);
         prepareCollision();
         handleCollision();
     }
-    frame = 1;
-    meanDt = meanDt2 = 0;
 
-    const SI = new SnapshotInterpolation()
-    let last = Date.now();
-    function mainLoop() {
-        const now = Date.now();
-        // dynamicsWorld.setGravity(new Ammo.btVector3(Math.sin(now) * 10, Math.cos(now) * 10 ,0))
-        simulate(now - last);
-        last = now;
-    }
-
-    if (interval) clearInterval(interval);
-    interval = setInterval(mainLoop, 1000 / 50);
 });

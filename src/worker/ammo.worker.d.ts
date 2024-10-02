@@ -41,6 +41,9 @@ export type MainMessage = {
     type: "release",
 } | {
     type: "pause",
+} | {
+    type: "tick",
+    data: number,
 }
 export type WorkerMessage = {
     type: "update"

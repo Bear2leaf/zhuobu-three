@@ -2,13 +2,12 @@ import React, { createContext, useEffect, useRef, useContext, useState, ReactEle
 import { MainMessage, WorkerMessage } from '../../worker/ammo.worker.js'
 import { PrimitiveProps, useFrame } from '@react-three/fiber';
 import { Euler, Group, Mesh, Quaternion, Vector3, Vector3Like } from 'three';
-// import @geckos.io/snapshot-interpolation
-import { SnapshotInterpolation } from '@geckos.io/snapshot-interpolation'
-import { Snapshot } from '@geckos.io/snapshot-interpolation/lib/types.js';
 
 // initialize the library
-const SI = new SnapshotInterpolation(50)
-
+const ballContainer = {
+    group: null as unknown as Group,
+    velocity: new Vector3(),
+}
 const worker = new Worker("dist/worker/main.js") as unknown as {
     onmessage: (message: { data: WorkerMessage }) => void;
     postMessage: (message: MainMessage) => void;
@@ -20,9 +19,18 @@ worker.onmessage = (message) => {
             type: "resetWorld",
         });
     } else if (message.data.type === "update") {
-        objects.splice(0, objects.length, ...message.data.objects);
-    } else if (message.data.type === "updateSI") {
-        SI.snapshot.add(message.data.snapshot as Snapshot);
+        objects.splice(0, objects.length);
+        for (const obj of message.data.objects) {
+            if (obj[7] === "Ball") {
+                ballContainer.group.position.set(obj[0], obj[1], obj[2]);
+                ballContainer.velocity.x = obj[8];
+                ballContainer.velocity.y = obj[9];
+                ballContainer.velocity.z = obj[10];
+            } else {
+                objects.push(obj);
+            }
+        }
+
     } else if (message.data.type === "requestLevel") {
         worker.postMessage({
             type: "release",
@@ -31,7 +39,6 @@ worker.onmessage = (message) => {
 }
 export const usePhysicsCharacter = () => {
     const ref = useRef<Group & { linvel?: () => Vector3, setLinvel?: (value: Vector3) => void }>(null)
-    const velocity = new Vector3();
     useEffect(() => {
         // Call function so the user can add shapes, positions, etc. to the body
         if (ref.current) {
@@ -40,20 +47,17 @@ export const usePhysicsCharacter = () => {
                 worker.postMessage({
                     type: "updateVelocity",
                     data: {
-                        name: "Ball",
                         x: value.x,
                         y: value.y,
                         z: value.z,
+                        name: "Ball"
                     }
                 })
             }
             ref.current.linvel = () => {
-                const ball = objects.find(o => o[7] === "Ball");
-                if(ball) {
-                    velocity.set(ball[8], ball[9], ball[10])
-                }
-                return velocity;
+                return ballContainer.velocity;
             }
+            ballContainer.group = ref.current;
             worker.postMessage({
                 type: "addBall",
                 data: {
@@ -69,15 +73,11 @@ export const usePhysicsCharacter = () => {
         }
     }, []);
 
-    useFrame(() => {
-        if (ref.current) {
-            const snapshot = SI.calcInterpolation("x y z");
-            if (snapshot) {
-                const { state } = snapshot;
-                const position = state[0] as unknown as (Vector3Like & {vx: number, vy: number, vz: number});
-                ref.current.position.set(position.x, position.y, position.z);
-            }
-        }
+    useFrame((state, delta, frame) => {
+        worker.postMessage({
+            type: "tick",
+            data: delta
+        })
     })
 
     return ref

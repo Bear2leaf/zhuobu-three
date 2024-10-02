@@ -29,8 +29,8 @@ const lerpAngle = (start: number, end: number, t: number) => {
 
 export const CharacterController = () => {
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = {
-        WALK_SPEED: 0.8,
-        RUN_SPEED: 1.6,
+        WALK_SPEED: 1.6,
+        RUN_SPEED: 3.2,
         ROTATION_SPEED: degToRad(0.5)
     };
     const rb = usePhysicsCharacter();

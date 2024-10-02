@@ -17,7 +17,6 @@
         "minigame-api-typings": "^3.8.4"
     },
     "dependencies": {
-        "@geckos.io/snapshot-interpolation": "^1.1.0",
         "@react-three/drei": "^9.114.0",
         "@react-three/fiber": "^8.17.8",
         "@react-three/uikit": "^0.5.4",
