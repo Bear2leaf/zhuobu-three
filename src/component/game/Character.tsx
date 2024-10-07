@@ -1,13 +1,14 @@
 
 import React, { useEffect, useRef } from "react";
-import { useAnimations, useGLTF } from "@react-three/drei";
+import { useAnimations } from "@react-three/drei";
 import { Mesh, SkinnedMesh } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ObjectMap } from "@react-three/fiber";
+import { useGLTF } from "../../misc/Gltf.js";
 
 export function Character({ animation, ...props }: { animation: string, scale: number }) {
   const group = useRef(null);
-  const { nodes, materials, animations } = useGLTF("/resources/models/character.glb", false) as unknown as GLTF & ObjectMap & {
+  const { nodes, materials, animations } = useGLTF("/resources/models/character.glb") as unknown as GLTF & ObjectMap & {
     nodes: Record<string, SkinnedMesh>;
   };
   const { actions } = useAnimations(animations, group);

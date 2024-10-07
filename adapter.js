@@ -270,7 +270,11 @@ function URL(url, url1) {
 }
 
 URL.createObjectURL = function (blob) {
-    return `data:image/jpeg;base64,${base64ArrayBuffer(blob.buffer)}`;
+    if (typeof blob.buffer === "string" && blob.buffer.startsWith("/* draco decoder */")) {
+        return "/resources/draco/draco_wasm_wrapper.js.bin";
+    } else {
+        return `data:image/jpeg;base64,${base64ArrayBuffer(blob.buffer)}`;
+    }
 }
 URL.revokeObjectURL = function (url) {
     // return wx.revokeBufferURL(url)
@@ -362,16 +366,198 @@ class ImageData {
         return imageData;
     }
 }
+
+
+class DRACOWorker {
+    constructor(DracoDecoderModule) {
+        let decoderConfig;
+        let decoderPending;
+        this.postMessage = null;
+        this.onmessage = function (e) {
+            const message = e.data;
+            switch (message.type) {
+                case 'init':
+                    decoderConfig = message.decoderConfig;
+                    decoderPending = new Promise(function (resolve /*, reject*/) {
+                        decoderConfig.onModuleLoaded = function (draco) {
+                            // Module is Promise-like. Wrap before resolving to avoid loop.
+                            resolve({ draco: draco });
+                        };
+                        DracoDecoderModule(decoderConfig);
+                    });
+                    break;
+
+                case 'decode':
+                    const buffer = message.buffer;
+                    const taskConfig = message.taskConfig;
+                    decoderPending.then((module) => {
+                        const draco = module.draco;
+                        const decoder = new draco.Decoder();
+                        const decoderBuffer = new draco.DecoderBuffer();
+                        decoderBuffer.Init(new Int8Array(buffer), buffer.byteLength);
+                        try {
+                            const geometry = decodeGeometry(draco, decoder, decoderBuffer, taskConfig);
+
+                            const buffers = geometry.attributes.map((attr) => attr.array.buffer);
+
+                            if (geometry.index) buffers.push(geometry.index.array.buffer);
+
+                            this.postMessage({ type: 'decode', id: message.id, geometry }, buffers);
+                        } catch (error) {
+                            console.error(error);
+
+                            this.postMessage({ type: 'error', id: message.id, error: error.message });
+                        } finally {
+                            draco.destroy(decoderBuffer);
+                            draco.destroy(decoder);
+                        }
+                    });
+                    break;
+            }
+        };
+
+        function decodeGeometry(draco, decoder, decoderBuffer, taskConfig) {
+            const attributeIDs = taskConfig.attributeIDs;
+            const attributeTypes = taskConfig.attributeTypes;
+
+            let dracoGeometry;
+            let decodingStatus;
+
+            const geometryType = decoder.GetEncodedGeometryType(decoderBuffer);
+
+            if (geometryType === draco.TRIANGULAR_MESH) {
+                dracoGeometry = new draco.Mesh();
+                decodingStatus = decoder.DecodeBufferToMesh(decoderBuffer, dracoGeometry);
+            } else if (geometryType === draco.POINT_CLOUD) {
+                dracoGeometry = new draco.PointCloud();
+                decodingStatus = decoder.DecodeBufferToPointCloud(decoderBuffer, dracoGeometry);
+            } else {
+                throw new Error('THREE.DRACOLoader: Unexpected geometry type.');
+            }
+
+            if (!decodingStatus.ok() || dracoGeometry.ptr === 0) {
+                throw new Error('THREE.DRACOLoader: Decoding failed: ' + decodingStatus.error_msg());
+            }
+
+            const geometry = { index: null, attributes: [] };
+
+            // Gather all vertex attributes.
+            for (const attributeName in attributeIDs) {
+                const attributeType = self[attributeTypes[attributeName]];
+
+                let attribute;
+                let attributeID;
+
+                // A Draco file may be created with default vertex attributes, whose attribute IDs
+                // are mapped 1:1 from their semantic name (POSITION, NORMAL, ...). Alternatively,
+                // a Draco file may contain a custom set of attributes, identified by known unique
+                // IDs. glTF files always do the latter, and `.drc` files typically do the former.
+                if (taskConfig.useUniqueIDs) {
+                    attributeID = attributeIDs[attributeName];
+                    attribute = decoder.GetAttributeByUniqueId(dracoGeometry, attributeID);
+                } else {
+                    attributeID = decoder.GetAttributeId(dracoGeometry, draco[attributeIDs[attributeName]]);
+
+                    if (attributeID === -1) continue;
+
+                    attribute = decoder.GetAttribute(dracoGeometry, attributeID);
+                }
+
+                geometry.attributes.push(decodeAttribute(draco, decoder, dracoGeometry, attributeName, attributeType, attribute));
+            }
+
+            // Add index.
+            if (geometryType === draco.TRIANGULAR_MESH) {
+                geometry.index = decodeIndex(draco, decoder, dracoGeometry);
+            }
+
+            draco.destroy(dracoGeometry);
+
+            return geometry;
+        }
+
+        function decodeIndex(draco, decoder, dracoGeometry) {
+            const numFaces = dracoGeometry.num_faces();
+            const numIndices = numFaces * 3;
+            const byteLength = numIndices * 4;
+
+            const ptr = draco._malloc(byteLength);
+            decoder.GetTrianglesUInt32Array(dracoGeometry, byteLength, ptr);
+            const index = new Uint32Array(draco.HEAPF32.buffer, ptr, numIndices).slice();
+            draco._free(ptr);
+
+            return { array: index, itemSize: 1 };
+        }
+
+        function decodeAttribute(draco, decoder, dracoGeometry, attributeName, attributeType, attribute) {
+            const numComponents = attribute.num_components();
+            const numPoints = dracoGeometry.num_points();
+            const numValues = numPoints * numComponents;
+            const byteLength = numValues * attributeType.BYTES_PER_ELEMENT;
+            const dataType = getDracoDataType(draco, attributeType);
+
+            const ptr = draco._malloc(byteLength);
+            decoder.GetAttributeDataArrayForAllPoints(dracoGeometry, attribute, dataType, byteLength, ptr);
+            const array = new attributeType(draco.HEAPF32.buffer, ptr, numValues).slice();
+            draco._free(ptr);
+
+            return {
+                name: attributeName,
+                array: array,
+                itemSize: numComponents,
+            };
+        }
+
+        function getDracoDataType(draco, attributeType) {
+            switch (attributeType) {
+                case Float32Array:
+                    return draco.DT_FLOAT32;
+                case Int8Array:
+                    return draco.DT_INT8;
+                case Int16Array:
+                    return draco.DT_INT16;
+                case Int32Array:
+                    return draco.DT_INT32;
+                case Uint8Array:
+                    return draco.DT_UINT8;
+                case Uint16Array:
+                    return draco.DT_UINT16;
+                case Uint32Array:
+                    return draco.DT_UINT32;
+            }
+        }
+    }
+}
+
+
+let workerNum = 0;
 class Worker {
     constructor(url, options) {
-        const worker = this.worker = wx.createWorker(url, options);
-        worker.onProcessKilled(() => {
-            console.log("woker is been killed");
-        });
-        worker.onMessage((message) => {
-            this.onmessage({data: message})
-        })
-        this.postMessage = worker.postMessage.bind(worker)
+        workerNum++;
+        if (workerNum > 1 && url === "/resources/draco/draco_wasm_wrapper.js.bin") {
+            tempFuncWrapper("Worker.constructor", [...arguments]);
+            const draco = require("/resources/draco/draco_wasm_wrapper");
+            const worker = this.worker = new DRACOWorker((d) => {
+                draco(d)
+            });
+            this.postMessage = (data) => worker.onmessage({ data });
+            worker.postMessage = (data) => {
+                // debugger
+                this.onmessage({ data })
+            };
+        } else if (workerNum === 1) {
+
+            const worker = this.worker = wx.createWorker(url, options);
+            worker.onProcessKilled(() => {
+                console.log("woker is been killed");
+            });
+            worker.onMessage((message) => {
+                this.onmessage({ data: message })
+            })
+            this.postMessage = worker.postMessage.bind(worker)
+        } else {
+            throw new Error("unsupport worker args")
+        }
     }
     onmessage = null;
 }
@@ -395,7 +581,10 @@ const _window = {
     localStorage: {},
     self: {
         requestAnimationFrame,
-        URL
+        URL,
+        Uint8Array,
+        Int8Array,
+        Float32Array
     },
     console: {
         log: console.log,
@@ -422,12 +611,14 @@ const _window = {
                 return WXWebAssembly.instantiate(url, imports)
             } else if (url.byteLength === 9520) {
                 return WXWebAssembly.instantiate("/resources/wasm/meshopt.wasm", imports)
-            } else if (url.byteLength === 76163) {
+            } else if (url.byteLength === 73540) {
                 return WXWebAssembly.instantiate("/resources/wasm/yoga-wasm-base64-esm.wasm", imports)
             } else if (url.byteLength === 1439831) {
                 return WXWebAssembly.instantiate("/resources/wasm/rapier_wasm3d_bg.wasm", imports)
+            } else if (url.byteLength === 285948) {
+                return WXWebAssembly.instantiate("/resources/draco/draco_decoder.wasm", imports)
             } else {
-                throw new Error("unsupport wasm size")
+                throw new Error("unsupport wasm size: " + url.byteLength)
             }
         },
         validate() {
@@ -441,10 +632,21 @@ const _window = {
     innerHeight: windowInfo.windowHeight,
     devicePixelRatio: windowInfo.pixelRatio,
     fetch: async function (url) {
-        tempFuncWrapper("window.fetch", [...arguments])
 
         if (typeof url === "object") {
+            tempFuncWrapper("window.fetch", ...Object.keys(url).map(o => `${o}: ${url[o]}`))
             url = url.url
+            if (url === "/resources/draco/draco_wasm_wrapper.js") {
+                return {
+                    ok: true,
+                    status: 200,
+                    async text() {
+                        return wx.getFileSystemManager().readFileSync(url + ".bin", "utf-8")
+                    }
+                }
+            }
+        } else {
+            tempFuncWrapper("window.fetch", [...arguments])
         }
         return {
             ok: true,

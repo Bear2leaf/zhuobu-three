@@ -1,11 +1,12 @@
 import React, { useEffect, useRef } from "react";
-import { useAnimations, useGLTF } from "@react-three/drei";
+import { useAnimations } from "@react-three/drei";
 import { usePhysics } from "../physics/PhysicsProvider.js";
 import { Mesh } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ObjectMap } from "@react-three/fiber";
+import { useGLTF } from "../../misc/Gltf.js";
 export function GameMap({ model, ...props }: { model: string }) {
-  const { nodes, scene, animations } = useGLTF(model, false) as unknown as GLTF & ObjectMap & {
+  const { nodes, scene, animations } = useGLTF(model) as unknown as GLTF & ObjectMap & {
     nodes: Record<string, Mesh>;
   };
   const group = useRef();

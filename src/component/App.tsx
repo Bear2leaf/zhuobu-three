@@ -2,9 +2,10 @@ import React, { act, useRef, useState } from 'react'
 
 
 import { Experience } from './game/Experience.js';
-import { OrbitControls } from '@react-three/drei';
-import Engine from '../Engine.js';
+import { useGLTF } from '../misc/Gltf.js';
+
 export default function App() {
+  useGLTF.setDecoderPath("/resources/draco/")
   return (
     <>
       <Experience></Experience>
@@ -12,4 +13,3 @@ export default function App() {
     </>
   )
 }
-
