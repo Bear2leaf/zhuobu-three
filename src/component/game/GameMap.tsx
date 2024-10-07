@@ -24,11 +24,11 @@ export function GameMap({ model, ...props }: { model: string }) {
       }
     });
   }, [scene]);
-  useEffect(() => {
-    if (actions && animations.length > 0) {
-      actions[animations[0].name]!.play();
-    }
-  }, [actions]);
+  // useEffect(() => {
+  //   if (actions && animations.length > 0) {
+  //     actions[animations[0].name]!.play();
+  //   }
+  // }, [actions]);
   return (
     <>
       <mesh receiveShadow castShadow ref={cube} name={nodes.Cube.name} geometry={nodes.Cube.geometry} material={nodes.Cube.material} position={nodes.Cube.position} quaternion={nodes.Cube.quaternion} scale={nodes.Cube.scale} ></mesh>

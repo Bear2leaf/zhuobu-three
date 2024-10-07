@@ -606,7 +606,7 @@ const _window = {
     WebAssembly: {
         Instance: WXWebAssembly.Instance,
         instantiate(url, imports) {
-            tempFuncWrapper("WebAssembly.instantiate", [...arguments, url.byteLength]);
+            // tempFuncWrapper("WebAssembly.instantiate", [...arguments, url.byteLength]);
             if (typeof url === "string") {
                 return WXWebAssembly.instantiate(url, imports)
             } else if (url.byteLength === 9520) {

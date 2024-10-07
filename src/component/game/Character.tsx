@@ -8,7 +8,7 @@ import { useGLTF } from "../../misc/Gltf.js";
 
 export function Character({ animation, ...props }: { animation: string, scale: number }) {
   const group = useRef(null);
-  const { nodes, materials, animations } = useGLTF("/resources/models/character.glb") as unknown as GLTF & ObjectMap & {
+  const { nodes, materials, animations } = useGLTF("/resources/models/game.glb") as unknown as GLTF & ObjectMap & {
     nodes: Record<string, SkinnedMesh>;
   };
   const { actions } = useAnimations(animations, group);

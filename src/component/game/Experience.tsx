@@ -28,7 +28,7 @@ export const Experience = () => {
       </directionalLight>
       <ambientLight intensity={0.5}></ambientLight>
         <GameMap
-          model={`/resources/models/terrain.glb`}
+          model={`/resources/models/game.glb`}
         />
         <CharacterController />
     </>

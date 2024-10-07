@@ -12570,7 +12570,7 @@
       "format": "esm"
     },
     "src/component/game/Character.tsx": {
-      "bytes": 2132,
+      "bytes": 2127,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12678,7 +12678,7 @@
       "format": "esm"
     },
     "src/component/game/GameMap.tsx": {
-      "bytes": 2441,
+      "bytes": 2456,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12724,7 +12724,7 @@
       "format": "esm"
     },
     "src/component/game/Experience.tsx": {
-      "bytes": 975,
+      "bytes": 972,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12755,7 +12755,7 @@
       "format": "esm"
     },
     "src/component/App.tsx": {
-      "bytes": 339,
+      "bytes": 398,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12887,7 +12887,7 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 3956849
+      "bytes": 3956824
     },
     "dist/main.js": {
       "imports": [],
@@ -12985,7 +12985,7 @@
           "bytesInOutput": 1316
         },
         "src/component/game/Character.tsx": {
-          "bytesInOutput": 2228
+          "bytesInOutput": 2223
         },
         "src/component/physics/PhysicsProvider.tsx": {
           "bytesInOutput": 3486
@@ -12994,13 +12994,13 @@
           "bytesInOutput": 5043
         },
         "src/component/game/GameMap.tsx": {
-          "bytesInOutput": 2630
+          "bytesInOutput": 2482
         },
         "src/component/game/Experience.tsx": {
-          "bytesInOutput": 1420
+          "bytesInOutput": 1417
         },
         "src/component/App.tsx": {
-          "bytesInOutput": 426
+          "bytesInOutput": 491
         },
         "src/Engine.ts": {
           "bytesInOutput": 1221
@@ -13009,7 +13009,7 @@
           "bytesInOutput": 715
         }
       },
-      "bytes": 2375443
+      "bytes": 2375352
     },
     "dist/worker/main.js.map": {
       "imports": [],
