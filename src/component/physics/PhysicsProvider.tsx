@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useRef, useContext, useState, ReactElement } from 'react'
+import React, { createContext, useEffect, useRef, useContext, useState, ReactElement, useLayoutEffect } from 'react'
 import { MainMessage, WorkerMessage } from '../../worker/ammo.worker.js'
 import { PrimitiveProps, useFrame } from '@react-three/fiber';
 import { Euler, Group, Mesh, Quaternion, Vector3, Vector3Like } from 'three';
@@ -9,7 +9,7 @@ const ballContainer = {
     velocity: new Vector3(),
     destoryObject: null as string|null,
     onCollisionEnter: (source: string, target: string) => { console.log("Collision Enter", source, target);
-        if (target === "Coin") {
+        if (target === "Coin" || target === "Room") {
             ballContainer.destoryObject = target;
         }
      },
@@ -96,7 +96,7 @@ export const usePhysicsCharacter = () => {
 
     return ref
 }
-export const usePhysicsRigidBody = () => {
+export const usePhysicsRigidBody = (onRemove: VoidFunction) => {
     const ref = useRef<Mesh>(null)
     useEffect(() => {
         // Call function so the user can add shapes, positions, etc. to the body
@@ -116,12 +116,12 @@ export const usePhysicsRigidBody = () => {
                     convex
                 }
             })
-        }
-        return () => {
-            worker.postMessage({
-                type: "removeMesh",
-                data: ref.current?.name || ""
-            })
+            return () => {
+                worker.postMessage({
+                    type: "removeMesh",
+                    data: name
+                })
+            }
         }
     }, []);
 
@@ -129,11 +129,8 @@ export const usePhysicsRigidBody = () => {
         const mesh = objects.find(o => o[7] === ref.current?.name);
         if (mesh && ref.current) {
             if (ref.current?.name === ballContainer.destoryObject) {
-                ref.current.visible = false;
-                worker.postMessage({
-                    type: "removeMesh",
-                    data: ref.current?.name || ""
-                })
+                onRemove();
+                ballContainer.destoryObject = null;
             }
             ref.current.position.set(mesh[0], mesh[1], mesh[2]);
             ref.current.quaternion.set(mesh[3], mesh[4], mesh[5], mesh[6]);
