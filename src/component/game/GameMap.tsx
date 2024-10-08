@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useAnimations } from "@react-three/drei";
-import { usePhysics } from "../physics/PhysicsProvider.js";
+import { usePhysicsRigidBody } from "../physics/PhysicsProvider.js";
 import { Mesh } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ObjectMap } from "@react-three/fiber";
@@ -11,11 +11,11 @@ export function GameMap({ model, ...props }: { model: string }) {
   };
   const group = useRef();
   const { actions } = useAnimations(animations, group);
-  const cube = usePhysics();
-  const grid = usePhysics();
-  const suzanne = usePhysics();
-  const suzanne001 = usePhysics();
-  const suzanne002 = usePhysics();
+  const cube = usePhysicsRigidBody();
+  const grid = usePhysicsRigidBody();
+  const suzanne = usePhysicsRigidBody();
+  const suzanne001 = usePhysicsRigidBody();
+  const suzanne002 = usePhysicsRigidBody();
   useEffect(() => {
     scene.traverse((child: any) => {
       if (child.isMesh) {

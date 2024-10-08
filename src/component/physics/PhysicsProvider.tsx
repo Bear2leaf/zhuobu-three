@@ -82,7 +82,7 @@ export const usePhysicsCharacter = () => {
 
     return ref
 }
-export const usePhysics = () => {
+export const usePhysicsRigidBody = () => {
     const ref = useRef<Mesh>(null)
     useEffect(() => {
         // Call function so the user can add shapes, positions, etc. to the body
