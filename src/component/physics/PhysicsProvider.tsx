@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useRef, useContext, useState, ReactElement, useLayoutEffect } from 'react'
-import { MainMessage, WorkerMessage } from '../../worker/ammo.worker.js'
+import { MainMessage, PhyicsObject, WorkerMessage } from '../../worker/ammo.worker.js'
 import { PrimitiveProps, useFrame } from '@react-three/fiber';
 import { Euler, Group, Mesh, Quaternion, Vector3, Vector3Like } from 'three';
 
@@ -7,12 +7,13 @@ import { Euler, Group, Mesh, Quaternion, Vector3, Vector3Like } from 'three';
 const ballContainer = {
     group: null as unknown as Group,
     velocity: new Vector3(),
-    destoryObject: null as string|null,
-    onCollisionEnter: (source: string, target: string) => { console.log("Collision Enter", source, target);
-        if (target === "Coin" || target === "Room") {
-            ballContainer.destoryObject = target;
-        }
-     },
+    destoryObject: null as string | null,
+    onCollisionEnter: (source: string, target: string) => {
+        console.log("Collision Enter", source, target);
+        // if (target === "Coin" || target === "Room") {
+        //     ballContainer.destoryObject = target;
+        // }
+    },
     onCollisionExit: (source: string, target: string) => { console.log("Collision Exit", source, target) },
     onCollisionUpdate: (source: string, target: string) => { }
 }
@@ -20,7 +21,7 @@ const worker = new Worker("dist/worker/main.js") as unknown as {
     onmessage: (message: { data: WorkerMessage }) => void;
     postMessage: (message: MainMessage) => void;
 };
-const objects: (WorkerMessage & { type: "update" })["objects"] = [];
+const objects: PhyicsObject[] = [];
 worker.onmessage = (message) => {
     if (message.data.type === "ready") {
         worker.postMessage({
@@ -28,7 +29,7 @@ worker.onmessage = (message) => {
         });
     } else if (message.data.type === "update") {
         objects.splice(0, objects.length);
-        for (const obj of message.data.objects) {
+        for (const obj of message.data.data) {
             if (obj[7] === "Ball") {
                 ballContainer.group.position.set(obj[0], obj[1], obj[2]);
                 ballContainer.velocity.x = obj[8];
@@ -86,11 +87,17 @@ export const usePhysicsCharacter = () => {
             // })
         }
     }, []);
-
-    useFrame((state, delta, frame) => {
+    useFrame((state, delta) => {
+        for (const obj of objects) {
+            if (obj[7] === "Coin") {
+                obj[1] = Math.sin(state.clock.elapsedTime);
+            } else if (obj[7] === "Cube") {
+                obj[1] = Math.sin(state.clock.elapsedTime) - 1;
+            }
+        }
         worker.postMessage({
             type: "tick",
-            data: delta
+            data: { delta, objects: [...objects] }
         })
     })
 
@@ -117,10 +124,14 @@ export const usePhysicsRigidBody = (onRemove: VoidFunction) => {
                 }
             })
             return () => {
+                const index = objects.findIndex(o => o[7] === name);
                 worker.postMessage({
                     type: "removeMesh",
                     data: name
                 })
+                if (index !== -1) {
+                    objects.splice(index, 1);
+                }
             }
         }
     }, []);
@@ -134,7 +145,7 @@ export const usePhysicsRigidBody = (onRemove: VoidFunction) => {
             }
             ref.current.position.set(mesh[0], mesh[1], mesh[2]);
             ref.current.quaternion.set(mesh[3], mesh[4], mesh[5], mesh[6]);
-            
+
         }
     })
 

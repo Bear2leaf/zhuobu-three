@@ -43,14 +43,12 @@ export type MainMessage = {
     type: "pause",
 } | {
     type: "tick",
-    data: number,
+    data: {delta: number, objects: PhyicsObject[]},
 }
+export type PhyicsObject = [number, number, number, number, number, number, number, string, number, number, number];
 export type WorkerMessage = {
     type: "update"
-    objects: [number, number, number, number, number, number, number, string, number, number, number][];
-} |{
-    type: "updateSI"
-    snapshot: {};
+    data: PhyicsObject[];
 } | {
     type: "ready",
 } | {

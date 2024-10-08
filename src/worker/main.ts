@@ -1,4 +1,4 @@
-import Ammo, { config, Module, handler, MainMessage, WorkerMessage } from "./ammo.worker.js"
+import Ammo, { config, Module, handler, MainMessage, WorkerMessage, PhyicsObject } from "./ammo.worker.js"
 
 
 enum CollisionFlags {
@@ -28,7 +28,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     const dynamicsWorld = new Ammo.btDiscreteDynamicsWorld(dispatcher, overlappingPairCache, solver, collisionConfiguration);
     dynamicsWorld.setGravity(new Ammo.btVector3(0, -10, 0));
 
-    const result: WorkerMessage & { type: "update" } = { type: "update", objects: [] };
+    const result: WorkerMessage & { type: "update" } = { type: "update", data: [] };
     const tempVec = new Ammo.btVector3;
     const collisionSetPrev = new Set<string>();
     const collisionSet = new Set<string>();
@@ -55,7 +55,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     function createBall() {
         const startTransform = new Ammo.btTransform();
         startTransform.setIdentity();
-        const mass = 1;
+        const mass = 10;
         const localInertia = new Ammo.btVector3(0, 0, 0);
         const sphereShape = new Ammo.btCapsuleShape(0.8 * 0.25, 1.5 * 0.25);
         sphereShape.calculateLocalInertia(mass, localInertia);
@@ -70,13 +70,15 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             ball: true
         };
         v.name = "Ball"
-        body.setUserPointer(v)
+        body.setUserPointer(v);
+        body.setCollisionFlags(CollisionFlags.CF_CHARACTER_OBJECT)
         dynamicsWorld.addRigidBody(body);
         bodies.push(body);
     };
-    function readBulletObject(i: number, object: [number, number, number, number, number, number, number, string, number, number, number]) {
-        const body = bodies[i];
+    function readBulletObject(body: Ammo.btRigidBody, object: [number, number, number, number, number, number, number, string, number, number, number]) {
         body.getMotionState().getWorldTransform(transform);
+        const data = Ammo.castObject(body.getUserPointer(), UserData);
+        object[7] = data.name!;
         const origin = transform.getOrigin();
         object[0] = origin.x();
         object[1] = origin.y();
@@ -86,12 +88,36 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         object[4] = rotation.y();
         object[5] = rotation.z();
         object[6] = rotation.w();
-        const data = Ammo.castObject(body.getUserPointer(), UserData);
-        object[7] = data.name!;
         const velocity = body.getLinearVelocity();
         object[8] = velocity.x();
         object[9] = velocity.y();
         object[10] = velocity.z();
+    }
+    function writeBulletObject(object: [number, number, number, number, number, number, number, string, number, number, number]) {
+        const body = bodies.find(body => Ammo.castObject(body.getUserPointer(), UserData).name === object[7]);
+        if (body === undefined) {
+            return;
+        }
+        const motionState = body.getMotionState();
+        motionState.getWorldTransform(transform);
+        const origin = transform.getOrigin();
+        origin.setX(object[0]);
+        origin.setY(object[1]);
+        origin.setZ(object[2]);
+        transform.setOrigin(origin);
+        const rotation = transform.getRotation();
+        rotation.setX(object[3]);
+        rotation.setY(object[4]);
+        rotation.setZ(object[5]);
+        rotation.setW(object[6]);
+        transform.setRotation(rotation);
+        motionState.setWorldTransform(transform);
+        body.setMotionState(motionState);
+        const velocity = body.getLinearVelocity();
+        velocity.setX(object[8]);
+        velocity.setY(object[9]);
+        velocity.setZ(object[10]);
+        body.setLinearVelocity(velocity);
     }
     function messageHandler(message: MainMessage) {
         if (message.type === "updateGravity") {
@@ -161,13 +187,12 @@ Ammo.bind(Module)(config).then(function (Ammo) {
                 shape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
             }
             shape.calculateLocalInertia(mass, localInertia);
+            
             const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, shape, localInertia);
             const body = new Ammo.btRigidBody(rbInfo);
             body.setFriction(1)
-            if (v.propertities?.dynamic) {
-                body.setCollisionFlags(body.getCollisionFlags() | CollisionFlags.CF_KINEMATIC_OBJECT)
-            }
-            body.setUserPointer(v)
+            body.setCollisionFlags(CollisionFlags.CF_KINEMATIC_OBJECT)
+            body.setUserPointer(v);
             dynamicsWorld.addRigidBody(body);
             bodies.push(body);
         } else if (message.type === "resetWorld") {
@@ -205,7 +230,10 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         } else if (message.type === "disableMesh") {
             updateBodyCollision(message.data, false);
         } else if (message.type === "tick") {
-            simulate(message.data);
+            for (let i = 0; i < message.data.objects.length; i++) {
+                writeBulletObject(message.data.objects[i]);
+            }
+            simulate(message.data.delta);
         }
     }
     function updateVelocity({ name, x, y, z }: (MainMessage & { type: "updateVelocity" })["data"]) {
@@ -274,14 +302,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
     }
     function simulate(dt: number) {
         if (pause) {
-
-            // Read bullet data into JS objects
-            for (let i = 0; i < bodies.length; i++) {
-                result.objects[i] = result.objects[i] || []
-                readBulletObject(i, result.objects[i]);
-
-            }
-            handler.postMessage(result);
             return;
         }
         dynamicsWorld.stepSimulation(dt);
@@ -298,11 +318,12 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             }
         }
 
-
+        result.data = [];
         // Read bullet data into JS objects
         for (let i = 0; i < bodies.length; i++) {
-            result.objects[i] = result.objects[i] || []
-            readBulletObject(i, result.objects[i]);
+            const data: PhyicsObject = [0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0];
+            result.data.push(data);
+            readBulletObject(bodies[i], result.data[i]);
         }
         handler.postMessage(result);
         prepareCollision();
