@@ -7,6 +7,9 @@ import { Euler, Group, Mesh, Quaternion, Vector3, Vector3Like } from 'three';
 const ballContainer = {
     group: null as unknown as Group,
     velocity: new Vector3(),
+    onCollisionEnter: (source: string, target: string) => { console.log("Collision Enter", source, target) },
+    onCollisionExit: (source: string, target: string) => { console.log("Collision Exit", source, target) },
+    onCollisionUpdate: (source: string, target: string) => { }
 }
 const worker = new Worker("dist/worker/main.js") as unknown as {
     onmessage: (message: { data: WorkerMessage }) => void;
@@ -35,6 +38,12 @@ worker.onmessage = (message) => {
         worker.postMessage({
             type: "release",
         });
+    } else if (message.data.type === "collisionEnter") {
+        ballContainer.onCollisionEnter(message.data.data[0], message.data.data[1]);
+    } else if (message.data.type === "collisionExit") {
+        ballContainer.onCollisionExit(message.data.data[0], message.data.data[1]);
+    } else if (message.data.type === "collisionUpdate") {
+        ballContainer.onCollisionUpdate(message.data.data[0], message.data.data[1]);
     }
 }
 export const usePhysicsCharacter = () => {

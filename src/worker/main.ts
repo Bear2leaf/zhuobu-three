@@ -158,7 +158,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
                     vertex2.setValue(newVertices[i * 9 + 6], newVertices[i * 9 + 7], newVertices[i * 9 + 8]);
                     mesh.addTriangle(vertex0, vertex1, vertex2)
                 }
-                shape = new Ammo.btBvhTriangleMeshShape(mesh, true);
+                shape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
             }
             shape.calculateLocalInertia(mass, localInertia);
             const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, shape, localInertia);
