@@ -7,7 +7,12 @@ import { Euler, Group, Mesh, Quaternion, Vector3, Vector3Like } from 'three';
 const ballContainer = {
     group: null as unknown as Group,
     velocity: new Vector3(),
-    onCollisionEnter: (source: string, target: string) => { console.log("Collision Enter", source, target) },
+    destoryObject: null as string|null,
+    onCollisionEnter: (source: string, target: string) => { console.log("Collision Enter", source, target);
+        if (target === "Coin") {
+            ballContainer.destoryObject = target;
+        }
+     },
     onCollisionExit: (source: string, target: string) => { console.log("Collision Exit", source, target) },
     onCollisionUpdate: (source: string, target: string) => { }
 }
@@ -47,7 +52,7 @@ worker.onmessage = (message) => {
     }
 }
 export const usePhysicsCharacter = () => {
-    const ref = useRef<Group & { linvel?: () => Vector3, setLinvel?: (value: Vector3) => void }>(null)
+    const ref = useRef<Group & { linvel?: () => Vector3, setLinvel?: (value: Vector3) => void, destory?: boolean }>(null)
     useEffect(() => {
         // Call function so the user can add shapes, positions, etc. to the body
         if (ref.current) {
@@ -123,8 +128,16 @@ export const usePhysicsRigidBody = () => {
     useFrame(() => {
         const mesh = objects.find(o => o[7] === ref.current?.name);
         if (mesh && ref.current) {
+            if (ref.current?.name === ballContainer.destoryObject) {
+                ref.current.visible = false;
+                worker.postMessage({
+                    type: "removeMesh",
+                    data: ref.current?.name || ""
+                })
+            }
             ref.current.position.set(mesh[0], mesh[1], mesh[2]);
             ref.current.quaternion.set(mesh[3], mesh[4], mesh[5], mesh[6]);
+            
         }
     })
 

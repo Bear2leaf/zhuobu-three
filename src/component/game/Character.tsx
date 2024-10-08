@@ -28,7 +28,7 @@ export function Character({ animation, ...props }: { animation: string, scale: n
           <skinnedMesh
             name="body"
             geometry={nodes.body.geometry}
-            material={materials["Material.001"]}
+            material={nodes.body.material}
             skeleton={nodes.body.skeleton}
             castShadow
             receiveShadow
@@ -36,7 +36,7 @@ export function Character({ animation, ...props }: { animation: string, scale: n
           <skinnedMesh
             name="eye"
             geometry={nodes.eye.geometry}
-            material={materials["Material.001"]}
+            material={nodes.eye.material}
             skeleton={nodes.eye.skeleton}
             castShadow
             receiveShadow
@@ -44,7 +44,7 @@ export function Character({ animation, ...props }: { animation: string, scale: n
           <skinnedMesh
             name="hand-"
             geometry={nodes["hand-"].geometry}
-            material={materials["Material.001"]}
+            material={nodes["hand-"].material}
             skeleton={nodes["hand-"].skeleton}
             castShadow
             receiveShadow
@@ -52,7 +52,7 @@ export function Character({ animation, ...props }: { animation: string, scale: n
           <skinnedMesh
             name="leg"
             geometry={nodes.leg.geometry}
-            material={materials["Material.001"]}
+            material={nodes.leg.material}
             skeleton={nodes.leg.skeleton}
             castShadow
             receiveShadow
