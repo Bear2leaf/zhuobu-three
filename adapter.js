@@ -263,9 +263,10 @@ class Blob {
         this.buffer = arrayBuffer
     }
 }
+
 function URL(url, url1) {
     return {
-        href: url === "NotoSansSC-Bold.png" ? "resources/font/" + url : url
+        href: url === "NotoSansSC.png" ? "resources/font/" + url : url
     }
 }
 

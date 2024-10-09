@@ -187,7 +187,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
                 shape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
             }
             shape.calculateLocalInertia(mass, localInertia);
-            
+
             const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, shape, localInertia);
             const body = new Ammo.btRigidBody(rbInfo);
             body.setFriction(1)
@@ -262,6 +262,18 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             const data1 = Ammo.castObject(body1.getUserPointer(), UserData);
             if (!collisionSet.has(`${data0.name}###${data1.name}`)) {
                 collisionSet.add(`${data0.name}###${data1.name}`);
+            }
+            if (data0.name === "Ball") {
+                for (let index = 0; index < mainfold.getNumContacts(); index++) {
+                    const element = mainfold.getContactPoint(index);
+                    const normal = element.get_m_normalWorldOnB();
+                    if (Math.round(normal.y())) {
+                        body1.setFriction(1);
+                    } else {
+                        body1.setFriction(0);
+                    }
+
+                }
             }
         }
     }

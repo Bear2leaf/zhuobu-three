@@ -7,16 +7,17 @@ export function UIRoot() {
     }, [])
     return (
         <Root>
-            <Fullscreen flexDirection="column" padding={10} gap={10}>
-                <Container onPointerDown={callback} active={{ backgroundColor: "yellow" }} flexGrow={1} backgroundOpacity={0.5} hover={{ backgroundOpacity: 1 }} backgroundColor="red" />
-                <Container active={{ backgroundColor: "yellow" }} flexGrow={1} backgroundOpacity={0.5} hover={{ backgroundOpacity: 1 }} backgroundColor="blue" />
-            </Fullscreen>
             <FontFamilyProvider
                 roboto={{
-                    bold: "resources/font/NotoSansSC-Bold.json",
+                    normal: "resources/font/NotoSansSC-Regular.json",
                 }}
             >
-                <Text fontFamily="roboto" color="red" fontSize={72}>关卡</Text>
+                <Fullscreen flexDirection="column" padding={10} gap={10}>
+                    <Container flexGrow={1} />
+                    <Container flexGrow={1} >
+                        <Text fontFamily="roboto" color="red" fontSize={72}>关卡</Text>
+                    </Container>
+                </Fullscreen>
             </FontFamilyProvider>
         </Root>
     )

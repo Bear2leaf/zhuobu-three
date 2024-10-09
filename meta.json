@@ -12677,8 +12677,8 @@
       ],
       "format": "esm"
     },
-    "src/component/game/GameMap.tsx": {
-      "bytes": 1341,
+    "src/component/game/Gameobject.tsx": {
+      "bytes": 527,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12689,6 +12689,27 @@
           "path": "src/component/physics/PhysicsProvider.tsx",
           "kind": "import-statement",
           "original": "../physics/PhysicsProvider.js"
+        },
+        {
+          "path": "three",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "src/component/game/GameMap.tsx": {
+      "bytes": 1017,
+      "imports": [
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "../physics/PhysicsProvider.js",
+          "kind": "import-statement",
+          "external": true
         },
         {
           "path": "three",
@@ -12711,6 +12732,11 @@
           "original": "../../misc/Gltf.js"
         },
         {
+          "path": "src/component/game/Gameobject.tsx",
+          "kind": "import-statement",
+          "original": "./Gameobject.js"
+        },
+        {
           "path": "<runtime>",
           "kind": "import-statement",
           "external": true
@@ -12718,8 +12744,56 @@
       ],
       "format": "esm"
     },
+    "node_modules/zustand/esm/vanilla.mjs": {
+      "bytes": 999,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/zustand/esm/react.mjs": {
+      "bytes": 665,
+      "imports": [
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/zustand/esm/vanilla.mjs",
+          "kind": "import-statement",
+          "original": "zustand/vanilla"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/zustand/esm/index.mjs": {
+      "bytes": 64,
+      "imports": [
+        {
+          "path": "node_modules/zustand/esm/vanilla.mjs",
+          "kind": "import-statement",
+          "original": "zustand/vanilla"
+        },
+        {
+          "path": "node_modules/zustand/esm/react.mjs",
+          "kind": "import-statement",
+          "original": "zustand/react"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/state.ts": {
+      "bytes": 256,
+      "imports": [
+        {
+          "path": "node_modules/zustand/esm/index.mjs",
+          "kind": "import-statement",
+          "original": "zustand"
+        }
+      ],
+      "format": "esm"
+    },
     "src/component/game/Experience.tsx": {
-      "bytes": 972,
+      "bytes": 1094,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12745,12 +12819,4012 @@
           "path": "src/component/game/GameMap.tsx",
           "kind": "import-statement",
           "original": "./GameMap"
+        },
+        {
+          "path": "src/state.ts",
+          "kind": "import-statement",
+          "original": "../../state"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/properties/alias.js": {
+      "bytes": 4250,
+      "imports": [
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@preact/signals-core/dist/signals-core.module.js": {
+      "bytes": 4245,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/utils.js": {
+      "bytes": 3032,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "./properties/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/properties/utils.js": {
+      "bytes": 460,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/properties/default.js": {
+      "bytes": 713,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/properties/immediate.js": {
+      "bytes": 2326,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/properties/merged.js": {
+      "bytes": 4016,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/default.js",
+          "kind": "import-statement",
+          "original": "./default.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/alias.js",
+          "kind": "import-statement",
+          "original": "./alias.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/properties/index.js": {
+      "bytes": 147,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/alias.js",
+          "kind": "import-statement",
+          "original": "./alias.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/default.js",
+          "kind": "import-statement",
+          "original": "./default.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/immediate.js",
+          "kind": "import-statement",
+          "original": "./immediate.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/merged.js",
+          "kind": "import-statement",
+          "original": "./merged.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/order.js": {
+      "bytes": 3986,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "./properties/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/listeners.js": {
+      "bytes": 719,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/transform.js": {
+      "bytes": 4491,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "./properties/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/yoga-layout/dist/binaries/yoga-wasm-base64-esm.js": {
+      "bytes": 123327,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/yoga-layout/dist/src/generated/YGEnums.js": {
+      "bytes": 7638,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/yoga-layout/dist/src/wrapAssembly.js": {
+      "bytes": 4782,
+      "imports": [
+        {
+          "path": "node_modules/yoga-layout/dist/src/generated/YGEnums.js",
+          "kind": "import-statement",
+          "original": "./generated/YGEnums.js"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/generated/YGEnums.js",
+          "kind": "import-statement",
+          "original": "./generated/YGEnums.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/yoga-layout/dist/src/load.js": {
+      "bytes": 508,
+      "imports": [
+        {
+          "path": "node_modules/yoga-layout/dist/binaries/yoga-wasm-base64-esm.js",
+          "kind": "import-statement",
+          "original": "../binaries/yoga-wasm-base64-esm.js"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/wrapAssembly.js",
+          "kind": "import-statement",
+          "original": "./wrapAssembly.js"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/generated/YGEnums.js",
+          "kind": "import-statement",
+          "original": "./generated/YGEnums.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/clipping.js": {
+      "bytes": 8849,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/load.js",
+          "kind": "import-statement",
+          "original": "yoga-layout/load"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/allocation/sorted-buckets.js": {
+      "bytes": 7852,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/allocation/index.js": {
+      "bytes": 37,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/allocation/sorted-buckets.js",
+          "kind": "import-statement",
+          "original": "./sorted-buckets.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/flex/setter.js": {
+      "bytes": 3839,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/flex/yoga.js": {
+      "bytes": 678,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/load.js",
+          "kind": "import-statement",
+          "original": "yoga-layout/load"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/flex/node.js": {
+      "bytes": 11959,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/load.js",
+          "kind": "import-statement",
+          "original": "yoga-layout/load"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/setter.js",
+          "kind": "import-statement",
+          "original": "./setter.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/immediate.js",
+          "kind": "import-statement",
+          "original": "../properties/immediate.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/yoga.js",
+          "kind": "import-statement",
+          "original": "./yoga.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/flex/index.js": {
+      "bytes": 56,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/setter.js",
+          "kind": "import-statement",
+          "original": "./setter.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/node.js",
+          "kind": "import-statement",
+          "original": "./node.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/active.js": {
+      "bytes": 1536,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/default.js",
+          "kind": "import-statement",
+          "original": "./properties/default.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/index.js",
+          "kind": "import-statement",
+          "original": "./components/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/utils.js": {
+      "bytes": 6038,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "../flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js": {
+      "bytes": 6575,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/immediate.js",
+          "kind": "import-statement",
+          "original": "../properties/immediate.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/utils.js": {
+      "bytes": 978,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/three/src/math/MathUtils.js",
+          "kind": "import-statement",
+          "original": "three/src/math/MathUtils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/panel-material.js": {
+      "bytes": 15652,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js": {
+      "bytes": 4983,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js": {
+      "bytes": 2219,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/panel-material.js",
+          "kind": "import-statement",
+          "original": "./panel-material.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "./interaction-panel-mesh.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js": {
+      "bytes": 10712,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/allocation/sorted-buckets.js",
+          "kind": "import-statement",
+          "original": "../allocation/sorted-buckets.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/panel-material.js",
+          "kind": "import-statement",
+          "original": "./panel-material.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "./instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/scroll.js": {
+      "bytes": 16659,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/three/src/math/MathUtils.js",
+          "kind": "import-statement",
+          "original": "three/src/math/MathUtils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "./panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "./order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/panel-material.js",
+          "kind": "import-statement",
+          "original": "./panel/panel-material.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "./panel/instanced-panel-group.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-mesh.js": {
+      "bytes": 1339,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/render/instanced-gylph-material.js": {
+      "bytes": 2942,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-group.js": {
+      "bytes": 9551,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-mesh.js",
+          "kind": "import-statement",
+          "original": "./instanced-glyph-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-gylph-material.js",
+          "kind": "import-statement",
+          "original": "./instanced-gylph-material.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../../order.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/responsive.js": {
+      "bytes": 600,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/dark.js": {
+      "bytes": 1216,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/panel/index.js": {
+      "bytes": 235,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "./interaction-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/panel-material.js",
+          "kind": "import-statement",
+          "original": "./panel-material.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "./instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "./instanced-panel-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "./instanced-panel.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/root.js": {
+      "bytes": 8342,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "../flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/scroll.js",
+          "kind": "import-statement",
+          "original": "../scroll.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-group.js",
+          "kind": "import-statement",
+          "original": "../text/render/instanced-glyph-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/container.js": {
+      "bytes": 4829,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/node.js",
+          "kind": "import-statement",
+          "original": "../flex/node.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/scroll.js",
+          "kind": "import-statement",
+          "original": "../scroll.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "../internals.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/image.js": {
+      "bytes": 12565,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "../flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/scroll.js",
+          "kind": "import-statement",
+          "original": "../scroll.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/immediate.js",
+          "kind": "import-statement",
+          "original": "../properties/immediate.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/interaction-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/utils.js",
+          "kind": "import-statement",
+          "original": "../properties/utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/utils.js": {
+      "bytes": 1393,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/wrapper/breakall-wrapper.js": {
+      "bytes": 1351,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js",
+          "kind": "import-statement",
+          "original": "./index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/wrapper/nowrap-wrapper.js": {
+      "bytes": 1182,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js",
+          "kind": "import-statement",
+          "original": "./index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/wrapper/word-wrapper.js": {
+      "bytes": 1548,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js",
+          "kind": "import-statement",
+          "original": "./index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js": {
+      "bytes": 292,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/breakall-wrapper.js",
+          "kind": "import-statement",
+          "original": "./breakall-wrapper.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/nowrap-wrapper.js",
+          "kind": "import-statement",
+          "original": "./nowrap-wrapper.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/word-wrapper.js",
+          "kind": "import-statement",
+          "original": "./word-wrapper.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/cache.js": {
+      "bytes": 1084,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/font.js",
+          "kind": "import-statement",
+          "original": "./font.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/font.js": {
+      "bytes": 4458,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/cache.js",
+          "kind": "import-statement",
+          "original": "./cache.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/layout.js": {
+      "bytes": 3326,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js",
+          "kind": "import-statement",
+          "original": "./wrapper/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/yoga-layout/dist/src/load.js",
+          "kind": "import-statement",
+          "original": "yoga-layout/load"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph.js": {
+      "bytes": 5011,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/font.js",
+          "kind": "import-statement",
+          "original": "../font.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../../panel/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/render/instanced-text.js": {
+      "bytes": 16430,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph.js",
+          "kind": "import-statement",
+          "original": "./instanced-glyph.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/layout.js",
+          "kind": "import-statement",
+          "original": "../layout.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../../properties/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/render/index.js": {
+      "bytes": 209,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-gylph-material.js",
+          "kind": "import-statement",
+          "original": "./instanced-gylph-material.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-mesh.js",
+          "kind": "import-statement",
+          "original": "./instanced-glyph-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph.js",
+          "kind": "import-statement",
+          "original": "./instanced-glyph.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-group.js",
+          "kind": "import-statement",
+          "original": "./instanced-glyph-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/instanced-text.js",
+          "kind": "import-statement",
+          "original": "./instanced-text.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/text/index.js": {
+      "bytes": 155,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js",
+          "kind": "import-statement",
+          "original": "./wrapper/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/font.js",
+          "kind": "import-statement",
+          "original": "./font.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/layout.js",
+          "kind": "import-statement",
+          "original": "./layout.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/render/index.js",
+          "kind": "import-statement",
+          "original": "./render/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/text.js": {
+      "bytes": 4063,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/node.js",
+          "kind": "import-statement",
+          "original": "../flex/node.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/index.js",
+          "kind": "import-statement",
+          "original": "../text/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/three/examples/jsm/loaders/SVGLoader.js": {
+      "bytes": 69698,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/svg.js": {
+      "bytes": 8771,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "../flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/scroll.js",
+          "kind": "import-statement",
+          "original": "../scroll.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/interaction-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/three/examples/jsm/loaders/SVGLoader.js",
+          "kind": "import-statement",
+          "original": "three/examples/jsm/loaders/SVGLoader.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "../internals.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/icon.js": {
+      "bytes": 6123,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "../flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/interaction-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/three/examples/jsm/loaders/SVGLoader.js",
+          "kind": "import-statement",
+          "original": "three/examples/jsm/loaders/SVGLoader.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/caret.js": {
+      "bytes": 2726,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "./order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "./panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "./panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "./properties/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/selection.js": {
+      "bytes": 3032,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "./panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "./order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "./panel/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/focus.js": {
+      "bytes": 234,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/input.js": {
+      "bytes": 12816,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "../flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/caret.js",
+          "kind": "import-statement",
+          "original": "../caret.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/selection.js",
+          "kind": "import-statement",
+          "original": "../selection.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/focus.js",
+          "kind": "import-statement",
+          "original": "../focus.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/index.js",
+          "kind": "import-statement",
+          "original": "../text/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/custom.js": {
+      "bytes": 4707,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/node.js",
+          "kind": "import-statement",
+          "original": "../flex/node.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/content.js": {
+      "bytes": 8559,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/node.js",
+          "kind": "import-statement",
+          "original": "../flex/node.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "../hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "../clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "../transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "../responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "../order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/active.js",
+          "kind": "import-statement",
+          "original": "../active.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "../listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-group.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js",
+          "kind": "import-statement",
+          "original": "../panel/instanced-panel-mesh.js"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "../dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "../panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "../properties/index.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/fullscreen.js": {
+      "bytes": 914,
+      "imports": [
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/video.js": {
+      "bytes": 1298,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/components/index.js": {
+      "bytes": 343,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/root.js",
+          "kind": "import-statement",
+          "original": "./root.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/container.js",
+          "kind": "import-statement",
+          "original": "./container.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/image.js",
+          "kind": "import-statement",
+          "original": "./image.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/text.js",
+          "kind": "import-statement",
+          "original": "./text.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/svg.js",
+          "kind": "import-statement",
+          "original": "./svg.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/icon.js",
+          "kind": "import-statement",
+          "original": "./icon.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/input.js",
+          "kind": "import-statement",
+          "original": "./input.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/custom.js",
+          "kind": "import-statement",
+          "original": "./custom.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/content.js",
+          "kind": "import-statement",
+          "original": "./content.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/fullscreen.js",
+          "kind": "import-statement",
+          "original": "./fullscreen.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/video.js",
+          "kind": "import-statement",
+          "original": "./video.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/hover.js": {
+      "bytes": 2331,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/index.js",
+          "kind": "import-statement",
+          "original": "./components/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "./properties/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/he/he.js": {
+      "bytes": 100899,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/nodes/node.js": {
+      "bytes": 1544,
+      "imports": [
+        {
+          "path": "node_modules/he/he.js",
+          "kind": "require-call",
+          "original": "he"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/nodes/type.js": {
+      "bytes": 352,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/nodes/comment.js": {
+      "bytes": 2300,
+      "imports": [
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/node.js",
+          "kind": "require-call",
+          "original": "./node"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/type.js",
+          "kind": "require-call",
+          "original": "./type"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domelementtype/lib/index.js": {
+      "bytes": 1978,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/domhandler/lib/node.js": {
+      "bytes": 15382,
+      "imports": [
+        {
+          "path": "node_modules/domelementtype/lib/index.js",
+          "kind": "require-call",
+          "original": "domelementtype"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domhandler/lib/index.js": {
+      "bytes": 6110,
+      "imports": [
+        {
+          "path": "node_modules/domelementtype/lib/index.js",
+          "kind": "require-call",
+          "original": "domelementtype"
+        },
+        {
+          "path": "node_modules/domhandler/lib/node.js",
+          "kind": "require-call",
+          "original": "./node.js"
+        },
+        {
+          "path": "node_modules/domhandler/lib/node.js",
+          "kind": "require-call",
+          "original": "./node.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/generated/decode-data-html.js": {
+      "bytes": 47822,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/generated/decode-data-xml.js": {
+      "bytes": 377,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/decode_codepoint.js": {
+      "bytes": 2312,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/decode.js": {
+      "bytes": 22611,
+      "imports": [
+        {
+          "path": "node_modules/entities/lib/generated/decode-data-html.js",
+          "kind": "require-call",
+          "original": "./generated/decode-data-html.js"
+        },
+        {
+          "path": "node_modules/entities/lib/generated/decode-data-xml.js",
+          "kind": "require-call",
+          "original": "./generated/decode-data-xml.js"
+        },
+        {
+          "path": "node_modules/entities/lib/decode_codepoint.js",
+          "kind": "require-call",
+          "original": "./decode_codepoint.js"
+        },
+        {
+          "path": "node_modules/entities/lib/decode_codepoint.js",
+          "kind": "require-call",
+          "original": "./decode_codepoint.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/generated/encode-html.js": {
+      "bytes": 27119,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/escape.js": {
+      "bytes": 4311,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/encode.js": {
+      "bytes": 2967,
+      "imports": [
+        {
+          "path": "node_modules/entities/lib/generated/encode-html.js",
+          "kind": "require-call",
+          "original": "./generated/encode-html.js"
+        },
+        {
+          "path": "node_modules/entities/lib/escape.js",
+          "kind": "require-call",
+          "original": "./escape.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/entities/lib/index.js": {
+      "bytes": 7144,
+      "imports": [
+        {
+          "path": "node_modules/entities/lib/decode.js",
+          "kind": "require-call",
+          "original": "./decode.js"
+        },
+        {
+          "path": "node_modules/entities/lib/encode.js",
+          "kind": "require-call",
+          "original": "./encode.js"
+        },
+        {
+          "path": "node_modules/entities/lib/escape.js",
+          "kind": "require-call",
+          "original": "./escape.js"
+        },
+        {
+          "path": "node_modules/entities/lib/escape.js",
+          "kind": "require-call",
+          "original": "./escape.js"
+        },
+        {
+          "path": "node_modules/entities/lib/encode.js",
+          "kind": "require-call",
+          "original": "./encode.js"
+        },
+        {
+          "path": "node_modules/entities/lib/decode.js",
+          "kind": "require-call",
+          "original": "./decode.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/dom-serializer/lib/foreignNames.js": {
+      "bytes": 2206,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/dom-serializer/lib/index.js": {
+      "bytes": 7122,
+      "imports": [
+        {
+          "path": "node_modules/domelementtype/lib/index.js",
+          "kind": "require-call",
+          "original": "domelementtype"
+        },
+        {
+          "path": "node_modules/entities/lib/index.js",
+          "kind": "require-call",
+          "original": "entities"
+        },
+        {
+          "path": "node_modules/dom-serializer/lib/foreignNames.js",
+          "kind": "require-call",
+          "original": "./foreignNames.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/stringify.js": {
+      "bytes": 3252,
+      "imports": [
+        {
+          "path": "node_modules/domhandler/lib/index.js",
+          "kind": "require-call",
+          "original": "domhandler"
+        },
+        {
+          "path": "node_modules/dom-serializer/lib/index.js",
+          "kind": "require-call",
+          "original": "dom-serializer"
+        },
+        {
+          "path": "node_modules/domelementtype/lib/index.js",
+          "kind": "require-call",
+          "original": "domelementtype"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/traversal.js": {
+      "bytes": 3750,
+      "imports": [
+        {
+          "path": "node_modules/domhandler/lib/index.js",
+          "kind": "require-call",
+          "original": "domhandler"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/manipulation.js": {
+      "bytes": 3732,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/querying.js": {
+      "bytes": 5468,
+      "imports": [
+        {
+          "path": "node_modules/domhandler/lib/index.js",
+          "kind": "require-call",
+          "original": "domhandler"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/legacy.js": {
+      "bytes": 5716,
+      "imports": [
+        {
+          "path": "node_modules/domhandler/lib/index.js",
+          "kind": "require-call",
+          "original": "domhandler"
+        },
+        {
+          "path": "node_modules/domutils/lib/querying.js",
+          "kind": "require-call",
+          "original": "./querying.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/helpers.js": {
+      "bytes": 5352,
+      "imports": [
+        {
+          "path": "node_modules/domhandler/lib/index.js",
+          "kind": "require-call",
+          "original": "domhandler"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/feeds.js": {
+      "bytes": 6478,
+      "imports": [
+        {
+          "path": "node_modules/domutils/lib/stringify.js",
+          "kind": "require-call",
+          "original": "./stringify.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/legacy.js",
+          "kind": "require-call",
+          "original": "./legacy.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/domutils/lib/index.js": {
+      "bytes": 2070,
+      "imports": [
+        {
+          "path": "node_modules/domutils/lib/stringify.js",
+          "kind": "require-call",
+          "original": "./stringify.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/traversal.js",
+          "kind": "require-call",
+          "original": "./traversal.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/manipulation.js",
+          "kind": "require-call",
+          "original": "./manipulation.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/querying.js",
+          "kind": "require-call",
+          "original": "./querying.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/legacy.js",
+          "kind": "require-call",
+          "original": "./legacy.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/helpers.js",
+          "kind": "require-call",
+          "original": "./helpers.js"
+        },
+        {
+          "path": "node_modules/domutils/lib/feeds.js",
+          "kind": "require-call",
+          "original": "./feeds.js"
+        },
+        {
+          "path": "node_modules/domhandler/lib/index.js",
+          "kind": "require-call",
+          "original": "domhandler"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/boolbase/index.js": {
+      "bytes": 125,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/css-what/lib/commonjs/types.js": {
+      "bytes": 1525,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/css-what/lib/commonjs/parse.js": {
+      "bytes": 16922,
+      "imports": [
+        {
+          "path": "node_modules/css-what/lib/commonjs/types.js",
+          "kind": "require-call",
+          "original": "./types"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-what/lib/commonjs/stringify.js": {
+      "bytes": 5430,
+      "imports": [
+        {
+          "path": "node_modules/css-what/lib/commonjs/types.js",
+          "kind": "require-call",
+          "original": "./types"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-what/lib/commonjs/index.js": {
+      "bytes": 1287,
+      "imports": [
+        {
+          "path": "node_modules/css-what/lib/commonjs/types.js",
+          "kind": "require-call",
+          "original": "./types"
+        },
+        {
+          "path": "node_modules/css-what/lib/commonjs/parse.js",
+          "kind": "require-call",
+          "original": "./parse"
+        },
+        {
+          "path": "node_modules/css-what/lib/commonjs/stringify.js",
+          "kind": "require-call",
+          "original": "./stringify"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/sort.js": {
+      "bytes": 2788,
+      "imports": [
+        {
+          "path": "node_modules/css-what/lib/commonjs/index.js",
+          "kind": "require-call",
+          "original": "css-what"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/attributes.js": {
+      "bytes": 7764,
+      "imports": [
+        {
+          "path": "node_modules/boolbase/index.js",
+          "kind": "require-call",
+          "original": "boolbase"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/nth-check/lib/parse.js": {
+      "bytes": 2358,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/nth-check/lib/compile.js": {
+      "bytes": 3813,
+      "imports": [
+        {
+          "path": "node_modules/boolbase/index.js",
+          "kind": "require-call",
+          "original": "boolbase"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/nth-check/lib/index.js": {
+      "bytes": 2220,
+      "imports": [
+        {
+          "path": "node_modules/nth-check/lib/parse.js",
+          "kind": "require-call",
+          "original": "./parse.js"
+        },
+        {
+          "path": "node_modules/nth-check/lib/compile.js",
+          "kind": "require-call",
+          "original": "./compile.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/pseudo-selectors/filters.js": {
+      "bytes": 6025,
+      "imports": [
+        {
+          "path": "node_modules/nth-check/lib/index.js",
+          "kind": "require-call",
+          "original": "nth-check"
+        },
+        {
+          "path": "node_modules/boolbase/index.js",
+          "kind": "require-call",
+          "original": "boolbase"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/pseudo-selectors/pseudos.js": {
+      "bytes": 3515,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/pseudo-selectors/aliases.js": {
+      "bytes": 1521,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/pseudo-selectors/subselects.js": {
+      "bytes": 4764,
+      "imports": [
+        {
+          "path": "node_modules/boolbase/index.js",
+          "kind": "require-call",
+          "original": "boolbase"
+        },
+        {
+          "path": "node_modules/css-select/lib/sort.js",
+          "kind": "require-call",
+          "original": "../sort.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/pseudo-selectors/index.js": {
+      "bytes": 2484,
+      "imports": [
+        {
+          "path": "node_modules/css-what/lib/commonjs/index.js",
+          "kind": "require-call",
+          "original": "css-what"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/filters.js",
+          "kind": "require-call",
+          "original": "./filters.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/pseudos.js",
+          "kind": "require-call",
+          "original": "./pseudos.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/aliases.js",
+          "kind": "require-call",
+          "original": "./aliases.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/subselects.js",
+          "kind": "require-call",
+          "original": "./subselects.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/general.js": {
+      "bytes": 5997,
+      "imports": [
+        {
+          "path": "node_modules/css-select/lib/attributes.js",
+          "kind": "require-call",
+          "original": "./attributes.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/index.js",
+          "kind": "require-call",
+          "original": "./pseudo-selectors/index.js"
+        },
+        {
+          "path": "node_modules/css-what/lib/commonjs/index.js",
+          "kind": "require-call",
+          "original": "css-what"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/compile.js": {
+      "bytes": 6104,
+      "imports": [
+        {
+          "path": "node_modules/css-what/lib/commonjs/index.js",
+          "kind": "require-call",
+          "original": "css-what"
+        },
+        {
+          "path": "node_modules/boolbase/index.js",
+          "kind": "require-call",
+          "original": "boolbase"
+        },
+        {
+          "path": "node_modules/css-select/lib/sort.js",
+          "kind": "require-call",
+          "original": "./sort.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/general.js",
+          "kind": "require-call",
+          "original": "./general.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/subselects.js",
+          "kind": "require-call",
+          "original": "./pseudo-selectors/subselects.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/css-select/lib/index.js": {
+      "bytes": 7117,
+      "imports": [
+        {
+          "path": "node_modules/domutils/lib/index.js",
+          "kind": "require-call",
+          "original": "domutils"
+        },
+        {
+          "path": "node_modules/boolbase/index.js",
+          "kind": "require-call",
+          "original": "boolbase"
+        },
+        {
+          "path": "node_modules/css-select/lib/compile.js",
+          "kind": "require-call",
+          "original": "./compile.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/subselects.js",
+          "kind": "require-call",
+          "original": "./pseudo-selectors/subselects.js"
+        },
+        {
+          "path": "node_modules/css-select/lib/pseudo-selectors/index.js",
+          "kind": "require-call",
+          "original": "./pseudo-selectors/index.js"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/back.js": {
+      "bytes": 164,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/matcher.js": {
+      "bytes": 3038,
+      "imports": [
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/type.js",
+          "kind": "require-call",
+          "original": "./nodes/type"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/void-tag.js": {
+      "bytes": 1453,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/nodes/text.js": {
+      "bytes": 4942,
+      "imports": [
+        {
+          "path": "node_modules/he/he.js",
+          "kind": "require-call",
+          "original": "he"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/node.js",
+          "kind": "require-call",
+          "original": "./node"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/type.js",
+          "kind": "require-call",
+          "original": "./type"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/nodes/html.js": {
+      "bytes": 47618,
+      "imports": [
+        {
+          "path": "node_modules/css-select/lib/index.js",
+          "kind": "require-call",
+          "original": "css-select"
+        },
+        {
+          "path": "node_modules/he/he.js",
+          "kind": "require-call",
+          "original": "he"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/back.js",
+          "kind": "require-call",
+          "original": "../back"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/matcher.js",
+          "kind": "require-call",
+          "original": "../matcher"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/void-tag.js",
+          "kind": "require-call",
+          "original": "../void-tag"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/comment.js",
+          "kind": "require-call",
+          "original": "./comment"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/node.js",
+          "kind": "require-call",
+          "original": "./node"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/text.js",
+          "kind": "require-call",
+          "original": "./text"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/type.js",
+          "kind": "require-call",
+          "original": "./type"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/parse.js": {
+      "bytes": 249,
+      "imports": [
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/html.js",
+          "kind": "require-call",
+          "original": "./nodes/html"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/valid.js": {
+      "bytes": 398,
+      "imports": [
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/html.js",
+          "kind": "require-call",
+          "original": "./nodes/html"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/node-html-parser/dist/index.js": {
+      "bytes": 1357,
+      "imports": [
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/comment.js",
+          "kind": "require-call",
+          "original": "./nodes/comment"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/html.js",
+          "kind": "require-call",
+          "original": "./nodes/html"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/node.js",
+          "kind": "require-call",
+          "original": "./nodes/node"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/text.js",
+          "kind": "require-call",
+          "original": "./nodes/text"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/nodes/type.js",
+          "kind": "require-call",
+          "original": "./nodes/type"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/parse.js",
+          "kind": "require-call",
+          "original": "./parse"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/valid.js",
+          "kind": "require-call",
+          "original": "./valid"
+        }
+      ],
+      "format": "cjs"
+    },
+    "node_modules/@pmndrs/uikit/dist/convert/html/defaults.js": {
+      "bytes": 1885,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/inline-style-parser/index.js": {
+      "bytes": 5095,
+      "imports": [],
+      "format": "cjs"
+    },
+    "node_modules/@pmndrs/uikit/dist/convert/html/generated-property-types.js": {
+      "bytes": 7113,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/convert/html/properties.js": {
+      "bytes": 8053,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "../../utils.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/convert/html/internals.js": {
+      "bytes": 13894,
+      "imports": [
+        {
+          "path": "node_modules/node-html-parser/dist/index.js",
+          "kind": "import-statement",
+          "original": "node-html-parser"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/convert/html/defaults.js",
+          "kind": "import-statement",
+          "original": "./defaults.js"
+        },
+        {
+          "path": "node_modules/inline-style-parser/index.js",
+          "kind": "import-statement",
+          "original": "inline-style-parser"
+        },
+        {
+          "path": "tw-to-css",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/convert/html/generated-property-types.js",
+          "kind": "import-statement",
+          "original": "./generated-property-types.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/convert/html/properties.js",
+          "kind": "import-statement",
+          "original": "./properties.js"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/node-html-parser/dist/index.js",
+          "kind": "import-statement",
+          "original": "node-html-parser"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/convert/html/properties.js",
+          "kind": "import-statement",
+          "original": "./properties.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@pmndrs/uikit/dist/internals.js": {
+      "bytes": 530,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/properties/index.js",
+          "kind": "import-statement",
+          "original": "./properties/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/utils.js",
+          "kind": "import-statement",
+          "original": "./utils.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/order.js",
+          "kind": "import-statement",
+          "original": "./order.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/listeners.js",
+          "kind": "import-statement",
+          "original": "./listeners.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/transform.js",
+          "kind": "import-statement",
+          "original": "./transform.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/clipping.js",
+          "kind": "import-statement",
+          "original": "./clipping.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/allocation/index.js",
+          "kind": "import-statement",
+          "original": "./allocation/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/flex/index.js",
+          "kind": "import-statement",
+          "original": "./flex/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/hover.js",
+          "kind": "import-statement",
+          "original": "./hover.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/dark.js",
+          "kind": "import-statement",
+          "original": "./dark.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "./responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/text/index.js",
+          "kind": "import-statement",
+          "original": "./text/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/panel/index.js",
+          "kind": "import-statement",
+          "original": "./panel/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/scroll.js",
+          "kind": "import-statement",
+          "original": "./scroll.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/components/index.js",
+          "kind": "import-statement",
+          "original": "./components/index.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/convert/html/internals.js",
+          "kind": "import-statement",
+          "original": "./convert/html/internals.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/font.js": {
+      "bytes": 2466,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+          "kind": "import-statement",
+          "original": "@react-three/fiber"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/context.js": {
+      "bytes": 355,
+      "imports": [
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/responsive.js": {
+      "bytes": 110,
+      "imports": [
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/default.js": {
+      "bytes": 769,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/utilts.js": {
+      "bytes": 2131,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/default.js",
+          "kind": "import-statement",
+          "original": "./default.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/ref.js": {
+      "bytes": 1139,
+      "imports": [
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/container.js": {
+      "bytes": 1532,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/root.js": {
+      "bytes": 2760,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+          "kind": "import-statement",
+          "original": "@react-three/fiber"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/image.js": {
+      "bytes": 1537,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/text.js": {
+      "bytes": 1651,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/font.js",
+          "kind": "import-statement",
+          "original": "./font.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/svg.js": {
+      "bytes": 1543,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/icon.js": {
+      "bytes": 1456,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/input.js": {
+      "bytes": 1896,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/font.js",
+          "kind": "import-statement",
+          "original": "./font.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/custom.js": {
+      "bytes": 1680,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/content.js": {
+      "bytes": 1501,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/context.js",
+          "kind": "import-statement",
+          "original": "./context.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/utilts.js",
+          "kind": "import-statement",
+          "original": "./utilts.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/ref.js",
+          "kind": "import-statement",
+          "original": "./ref.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/fullscreen.js": {
+      "bytes": 1887,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/root.js",
+          "kind": "import-statement",
+          "original": "./root.js"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+          "kind": "import-statement",
+          "original": "@react-three/fiber"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/suspending.js": {
+      "bytes": 492,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/image.js",
+          "kind": "import-statement",
+          "original": "./image.js"
+        },
+        {
+          "path": "node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+          "kind": "import-statement",
+          "original": "@react-three/fiber"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/node_modules/zustand/esm/vanilla.mjs": {
+      "bytes": 1690,
+      "imports": [],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/node_modules/zustand/esm/index.mjs": {
+      "bytes": 2014,
+      "imports": [
+        {
+          "path": "node_modules/@react-three/uikit/node_modules/zustand/esm/vanilla.mjs",
+          "kind": "import-statement",
+          "original": "zustand/vanilla"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/node_modules/zustand/esm/vanilla.mjs",
+          "kind": "import-statement",
+          "original": "zustand/vanilla"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/use-sync-external-store/shim/with-selector.js",
+          "kind": "import-statement",
+          "original": "use-sync-external-store/shim/with-selector.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/portal.js": {
+      "bytes": 8205,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/image.js",
+          "kind": "import-statement",
+          "original": "./image.js"
+        },
+        {
+          "path": "node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+          "kind": "import-statement",
+          "original": "@react-three/fiber"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/node_modules/zustand/esm/index.mjs",
+          "kind": "import-statement",
+          "original": "zustand"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/video.js": {
+      "bytes": 2724,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/image.js",
+          "kind": "import-statement",
+          "original": "./image.js"
+        },
+        {
+          "path": "node_modules/three/build/three.module.js",
+          "kind": "import-statement",
+          "original": "three"
+        },
+        {
+          "path": "node_modules/@preact/signals-core/dist/signals-core.module.js",
+          "kind": "import-statement",
+          "original": "@preact/signals-core"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/fiber/dist/react-three-fiber.esm.js",
+          "kind": "import-statement",
+          "original": "@react-three/fiber"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/convert/html/preview.js": {
+      "bytes": 2943,
+      "imports": [
+        {
+          "path": "node_modules/react/jsx-runtime.js",
+          "kind": "import-statement",
+          "original": "react/jsx-runtime"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/default.js",
+          "kind": "import-statement",
+          "original": "../../default.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/container.js",
+          "kind": "import-statement",
+          "original": "../../container.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/input.js",
+          "kind": "import-statement",
+          "original": "../../input.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/text.js",
+          "kind": "import-statement",
+          "original": "../../text.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/svg.js",
+          "kind": "import-statement",
+          "original": "../../svg.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/image.js",
+          "kind": "import-statement",
+          "original": "../../image.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/video.js",
+          "kind": "import-statement",
+          "original": "../../video.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/icon.js",
+          "kind": "import-statement",
+          "original": "../../icon.js"
+        },
+        {
+          "path": "<runtime>",
+          "kind": "import-statement",
+          "external": true
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/convert/html/index.js": {
+      "bytes": 2397,
+      "imports": [
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "prettier/standalone",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "prettier/plugins/babel.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "prettier/plugins/estree.js",
+          "kind": "import-statement",
+          "external": true
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/convert/html/preview.js",
+          "kind": "import-statement",
+          "original": "./preview.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "node_modules/@react-three/uikit/dist/index.js": {
+      "bytes": 751,
+      "imports": [
+        {
+          "path": "node_modules/@react-three/uikit/dist/font.js",
+          "kind": "import-statement",
+          "original": "./font.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/responsive.js",
+          "kind": "import-statement",
+          "original": "./responsive.js"
+        },
+        {
+          "path": "node_modules/@pmndrs/uikit/dist/internals.js",
+          "kind": "import-statement",
+          "original": "@pmndrs/uikit/internals"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/default.js",
+          "kind": "import-statement",
+          "original": "./default.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/container.js",
+          "kind": "import-statement",
+          "original": "./container.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/root.js",
+          "kind": "import-statement",
+          "original": "./root.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/image.js",
+          "kind": "import-statement",
+          "original": "./image.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/text.js",
+          "kind": "import-statement",
+          "original": "./text.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/svg.js",
+          "kind": "import-statement",
+          "original": "./svg.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/icon.js",
+          "kind": "import-statement",
+          "original": "./icon.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/input.js",
+          "kind": "import-statement",
+          "original": "./input.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/custom.js",
+          "kind": "import-statement",
+          "original": "./custom.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/content.js",
+          "kind": "import-statement",
+          "original": "./content.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/fullscreen.js",
+          "kind": "import-statement",
+          "original": "./fullscreen.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/suspending.js",
+          "kind": "import-statement",
+          "original": "./suspending.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/portal.js",
+          "kind": "import-statement",
+          "original": "./portal.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/video.js",
+          "kind": "import-statement",
+          "original": "./video.js"
+        },
+        {
+          "path": "node_modules/@react-three/uikit/dist/convert/html/index.js",
+          "kind": "import-statement",
+          "original": "./convert/html/index.js"
+        }
+      ],
+      "format": "esm"
+    },
+    "src/component/ui/UIRoot.tsx": {
+      "bytes": 830,
+      "imports": [
+        {
+          "path": "node_modules/@react-three/uikit/dist/index.js",
+          "kind": "import-statement",
+          "original": "@react-three/uikit"
+        },
+        {
+          "path": "node_modules/react/index.js",
+          "kind": "import-statement",
+          "original": "react"
         }
       ],
       "format": "esm"
     },
     "src/component/App.tsx": {
-      "bytes": 398,
+      "bytes": 432,
       "imports": [
         {
           "path": "node_modules/react/index.js",
@@ -12766,6 +16840,11 @@
           "path": "src/misc/Gltf.tsx",
           "kind": "import-statement",
           "original": "../misc/Gltf.js"
+        },
+        {
+          "path": "src/component/ui/UIRoot.tsx",
+          "kind": "import-statement",
+          "original": "./ui/UIRoot.js"
         }
       ],
       "format": "esm"
@@ -12850,7 +16929,7 @@
       "format": "esm"
     },
     "src/worker/main.ts": {
-      "bytes": 14555,
+      "bytes": 15040,
       "imports": [
         {
           "path": "src/worker/ammo.worker.js",
@@ -12882,18 +16961,39 @@
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 3957716
+      "bytes": 4864595
     },
     "dist/main.js": {
-      "imports": [],
+      "imports": [
+        {
+          "path": "tw-to-css",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "prettier/standalone",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "prettier/plugins/babel.js",
+          "kind": "require-call",
+          "external": true
+        },
+        {
+          "path": "prettier/plugins/estree.js",
+          "kind": "require-call",
+          "external": true
+        }
+      ],
       "exports": [],
       "entryPoint": "src/main.ts",
       "inputs": {
         "node_modules/three/build/three.module.js": {
-          "bytesInOutput": 1337687
+          "bytesInOutput": 1341278
         },
         "node_modules/react/cjs/react.development.js": {
-          "bytesInOutput": 77223
+          "bytesInOutput": 77267
         },
         "node_modules/react/index.js": {
           "bytesInOutput": 230
@@ -12905,31 +17005,31 @@
           "bytesInOutput": 270
         },
         "node_modules/@react-three/fiber/node_modules/zustand/esm/index.js": {
-          "bytesInOutput": 4439
+          "bytesInOutput": 4441
         },
         "node_modules/suspend-react/index.js": {
-          "bytesInOutput": 2260
+          "bytesInOutput": 2264
         },
         "node_modules/react/cjs/react-jsx-runtime.development.js": {
-          "bytesInOutput": 36478
+          "bytesInOutput": 36509
         },
         "node_modules/react/jsx-runtime.js": {
           "bytesInOutput": 254
         },
         "node_modules/scheduler/cjs/scheduler.development.js": {
-          "bytesInOutput": 16896
+          "bytesInOutput": 16902
         },
         "node_modules/scheduler/index.js": {
           "bytesInOutput": 242
         },
         "node_modules/react-reconciler/cjs/react-reconciler.development.js": {
-          "bytesInOutput": 652827
+          "bytesInOutput": 652967
         },
         "node_modules/react-reconciler/index.js": {
           "bytesInOutput": 263
         },
         "node_modules/@react-three/fiber/dist/events-3515660a.esm.js": {
-          "bytesInOutput": 63284
+          "bytesInOutput": 67178
         },
         "node_modules/debounce/index.js": {
           "bytesInOutput": 1409
@@ -12938,7 +17038,7 @@
           "bytesInOutput": 650
         },
         "node_modules/@babel/runtime/helpers/esm/extends.js": {
-          "bytesInOutput": 398
+          "bytesInOutput": 413
         },
         "node_modules/three-stdlib/_polyfill/constants.js": {
           "bytesInOutput": 188
@@ -12947,13 +17047,13 @@
           "bytesInOutput": 2224
         },
         "node_modules/three-stdlib/_polyfill/LoaderUtils.js": {
-          "bytesInOutput": 419
+          "bytesInOutput": 424
         },
         "node_modules/three-stdlib/loaders/GLTFLoader.js": {
-          "bytesInOutput": 109374
+          "bytesInOutput": 109422
         },
         "node_modules/three-stdlib/loaders/DRACOLoader.js": {
-          "bytesInOutput": 12935
+          "bytesInOutput": 12954
         },
         "node_modules/three-stdlib/libs/MeshoptDecoder.js": {
           "bytesInOutput": 22675
@@ -12962,55 +17062,373 @@
           "bytesInOutput": 157
         },
         "node_modules/@react-three/drei/core/Fbo.js": {
-          "bytesInOutput": 1340
+          "bytesInOutput": 1343
         },
         "node_modules/@react-three/drei/core/OrthographicCamera.js": {
-          "bytesInOutput": 2709
+          "bytesInOutput": 2711
         },
         "node_modules/@react-three/drei/core/useAnimations.js": {
-          "bytesInOutput": 1581
+          "bytesInOutput": 1583
+        },
+        "node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js": {
+          "bytesInOutput": 5090
+        },
+        "node_modules/use-sync-external-store/shim/index.js": {
+          "bytesInOutput": 275
+        },
+        "node_modules/use-sync-external-store/cjs/use-sync-external-store-shim/with-selector.development.js": {
+          "bytesInOutput": 4042
+        },
+        "node_modules/use-sync-external-store/shim/with-selector.js": {
+          "bytesInOutput": 277
         },
         "node_modules/@react-three/drei/index.js": {
           "bytesInOutput": 137
         },
         "node_modules/three/src/math/MathUtils.js": {
-          "bytesInOutput": 231
+          "bytesInOutput": 314
         },
         "src/misc/Gltf.tsx": {
-          "bytesInOutput": 1316
+          "bytesInOutput": 1320
         },
         "src/component/game/Character.tsx": {
-          "bytesInOutput": 2201
+          "bytesInOutput": 2203
         },
         "src/component/physics/PhysicsProvider.tsx": {
-          "bytesInOutput": 4811
+          "bytesInOutput": 4818
         },
         "src/component/game/CharacterController.tsx": {
-          "bytesInOutput": 5043
+          "bytesInOutput": 5045
+        },
+        "src/component/game/Gameobject.tsx": {
+          "bytesInOutput": 563
         },
         "src/component/game/GameMap.tsx": {
-          "bytesInOutput": 1295
+          "bytesInOutput": 924
+        },
+        "node_modules/zustand/esm/vanilla.mjs": {
+          "bytesInOutput": 1166
+        },
+        "node_modules/zustand/esm/react.mjs": {
+          "bytesInOutput": 805
+        },
+        "node_modules/zustand/esm/index.mjs": {
+          "bytesInOutput": 113
+        },
+        "src/state.ts": {
+          "bytesInOutput": 243
         },
         "src/component/game/Experience.tsx": {
-          "bytesInOutput": 1417
+          "bytesInOutput": 1531
+        },
+        "node_modules/@pmndrs/uikit/dist/properties/alias.js": {
+          "bytesInOutput": 4582
+        },
+        "node_modules/@preact/signals-core/dist/signals-core.module.js": {
+          "bytesInOutput": 7296
+        },
+        "node_modules/@pmndrs/uikit/dist/utils.js": {
+          "bytesInOutput": 2748
+        },
+        "node_modules/@pmndrs/uikit/dist/properties/utils.js": {
+          "bytesInOutput": 616
+        },
+        "node_modules/@pmndrs/uikit/dist/properties/default.js": {
+          "bytesInOutput": 739
+        },
+        "node_modules/@pmndrs/uikit/dist/properties/immediate.js": {
+          "bytesInOutput": 1808
+        },
+        "node_modules/@pmndrs/uikit/dist/properties/merged.js": {
+          "bytesInOutput": 3695
+        },
+        "node_modules/@pmndrs/uikit/dist/properties/index.js": {
+          "bytesInOutput": 196
+        },
+        "node_modules/@pmndrs/uikit/dist/order.js": {
+          "bytesInOutput": 3550
+        },
+        "node_modules/@pmndrs/uikit/dist/listeners.js": {
+          "bytesInOutput": 1018
+        },
+        "node_modules/@pmndrs/uikit/dist/transform.js": {
+          "bytesInOutput": 4256
+        },
+        "node_modules/yoga-layout/dist/binaries/yoga-wasm-base64-esm.js": {
+          "bytesInOutput": 145259
+        },
+        "node_modules/yoga-layout/dist/src/generated/YGEnums.js": {
+          "bytesInOutput": 8472
+        },
+        "node_modules/yoga-layout/dist/src/wrapAssembly.js": {
+          "bytesInOutput": 3793
+        },
+        "node_modules/yoga-layout/dist/src/load.js": {
+          "bytesInOutput": 298
+        },
+        "node_modules/@pmndrs/uikit/dist/clipping.js": {
+          "bytesInOutput": 8770
+        },
+        "node_modules/@pmndrs/uikit/dist/allocation/sorted-buckets.js": {
+          "bytesInOutput": 5775
+        },
+        "node_modules/@pmndrs/uikit/dist/allocation/index.js": {
+          "bytesInOutput": 125
+        },
+        "node_modules/@pmndrs/uikit/dist/flex/setter.js": {
+          "bytesInOutput": 4506
+        },
+        "node_modules/@pmndrs/uikit/dist/flex/yoga.js": {
+          "bytesInOutput": 793
+        },
+        "node_modules/@pmndrs/uikit/dist/flex/node.js": {
+          "bytesInOutput": 11426
+        },
+        "node_modules/@pmndrs/uikit/dist/flex/index.js": {
+          "bytesInOutput": 122
+        },
+        "node_modules/@pmndrs/uikit/dist/active.js": {
+          "bytesInOutput": 1714
+        },
+        "node_modules/@pmndrs/uikit/dist/components/utils.js": {
+          "bytesInOutput": 5205
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/instanced-panel.js": {
+          "bytesInOutput": 6789
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/utils.js": {
+          "bytesInOutput": 985
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/panel-material.js": {
+          "bytesInOutput": 15544
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/interaction-panel-mesh.js": {
+          "bytesInOutput": 4487
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-mesh.js": {
+          "bytesInOutput": 2329
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/instanced-panel-group.js": {
+          "bytesInOutput": 11039
+        },
+        "node_modules/@pmndrs/uikit/dist/scroll.js": {
+          "bytesInOutput": 15439
+        },
+        "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-mesh.js": {
+          "bytesInOutput": 1775
+        },
+        "node_modules/@pmndrs/uikit/dist/text/render/instanced-gylph-material.js": {
+          "bytesInOutput": 3037
+        },
+        "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph-group.js": {
+          "bytesInOutput": 9652
+        },
+        "node_modules/@pmndrs/uikit/dist/responsive.js": {
+          "bytesInOutput": 776
+        },
+        "node_modules/@pmndrs/uikit/dist/dark.js": {
+          "bytesInOutput": 983
+        },
+        "node_modules/@pmndrs/uikit/dist/panel/index.js": {
+          "bytesInOutput": 264
+        },
+        "node_modules/@pmndrs/uikit/dist/components/root.js": {
+          "bytesInOutput": 6935
+        },
+        "node_modules/@pmndrs/uikit/dist/components/container.js": {
+          "bytesInOutput": 3780
+        },
+        "node_modules/@pmndrs/uikit/dist/components/image.js": {
+          "bytesInOutput": 10863
+        },
+        "node_modules/@pmndrs/uikit/dist/text/utils.js": {
+          "bytesInOutput": 1243
+        },
+        "node_modules/@pmndrs/uikit/dist/text/wrapper/breakall-wrapper.js": {
+          "bytesInOutput": 1347
+        },
+        "node_modules/@pmndrs/uikit/dist/text/wrapper/nowrap-wrapper.js": {
+          "bytesInOutput": 1200
+        },
+        "node_modules/@pmndrs/uikit/dist/text/wrapper/word-wrapper.js": {
+          "bytesInOutput": 1522
+        },
+        "node_modules/@pmndrs/uikit/dist/text/wrapper/index.js": {
+          "bytesInOutput": 340
+        },
+        "node_modules/@pmndrs/uikit/dist/text/cache.js": {
+          "bytesInOutput": 1164
+        },
+        "node_modules/@pmndrs/uikit/dist/text/font.js": {
+          "bytesInOutput": 4714
+        },
+        "node_modules/@pmndrs/uikit/dist/text/layout.js": {
+          "bytesInOutput": 2955
+        },
+        "node_modules/@pmndrs/uikit/dist/text/render/instanced-glyph.js": {
+          "bytesInOutput": 5200
+        },
+        "node_modules/@pmndrs/uikit/dist/text/render/instanced-text.js": {
+          "bytesInOutput": 15842
+        },
+        "node_modules/@pmndrs/uikit/dist/text/render/index.js": {
+          "bytesInOutput": 254
+        },
+        "node_modules/@pmndrs/uikit/dist/text/index.js": {
+          "bytesInOutput": 180
+        },
+        "node_modules/@pmndrs/uikit/dist/components/text.js": {
+          "bytesInOutput": 3313
+        },
+        "node_modules/three/examples/jsm/loaders/SVGLoader.js": {
+          "bytesInOutput": 74368
+        },
+        "node_modules/@pmndrs/uikit/dist/components/svg.js": {
+          "bytesInOutput": 7493
+        },
+        "node_modules/@pmndrs/uikit/dist/components/icon.js": {
+          "bytesInOutput": 4972
+        },
+        "node_modules/@pmndrs/uikit/dist/caret.js": {
+          "bytesInOutput": 2424
+        },
+        "node_modules/@pmndrs/uikit/dist/selection.js": {
+          "bytesInOutput": 2722
+        },
+        "node_modules/@pmndrs/uikit/dist/focus.js": {
+          "bytesInOutput": 252
+        },
+        "node_modules/@pmndrs/uikit/dist/components/input.js": {
+          "bytesInOutput": 11812
+        },
+        "node_modules/@pmndrs/uikit/dist/components/custom.js": {
+          "bytesInOutput": 3761
+        },
+        "node_modules/@pmndrs/uikit/dist/components/content.js": {
+          "bytesInOutput": 7085
+        },
+        "node_modules/@pmndrs/uikit/dist/components/fullscreen.js": {
+          "bytesInOutput": 794
+        },
+        "node_modules/@pmndrs/uikit/dist/components/video.js": {
+          "bytesInOutput": 1235
+        },
+        "node_modules/@pmndrs/uikit/dist/components/index.js": {
+          "bytesInOutput": 323
+        },
+        "node_modules/@pmndrs/uikit/dist/hover.js": {
+          "bytesInOutput": 2606
+        },
+        "node_modules/@pmndrs/uikit/dist/convert/html/defaults.js": {
+          "bytesInOutput": 101
+        },
+        "node_modules/inline-style-parser/index.js": {
+          "bytesInOutput": 4192
+        },
+        "node_modules/@pmndrs/uikit/dist/convert/html/generated-property-types.js": {
+          "bytesInOutput": 7265
+        },
+        "node_modules/@pmndrs/uikit/dist/convert/html/properties.js": {
+          "bytesInOutput": 124
+        },
+        "node_modules/@pmndrs/uikit/dist/convert/html/internals.js": {
+          "bytesInOutput": 1273
+        },
+        "node_modules/@pmndrs/uikit/dist/internals.js": {
+          "bytesInOutput": 412
+        },
+        "node_modules/@react-three/uikit/dist/font.js": {
+          "bytesInOutput": 899
+        },
+        "node_modules/@react-three/uikit/dist/context.js": {
+          "bytesInOutput": 503
+        },
+        "node_modules/@react-three/uikit/dist/responsive.js": {
+          "bytesInOutput": 118
+        },
+        "node_modules/@react-three/uikit/dist/default.js": {
+          "bytesInOutput": 447
+        },
+        "node_modules/@react-three/uikit/dist/utilts.js": {
+          "bytesInOutput": 2332
+        },
+        "node_modules/@react-three/uikit/dist/ref.js": {
+          "bytesInOutput": 1162
+        },
+        "node_modules/@react-three/uikit/dist/container.js": {
+          "bytesInOutput": 1705
+        },
+        "node_modules/@react-three/uikit/dist/root.js": {
+          "bytesInOutput": 3055
+        },
+        "node_modules/@react-three/uikit/dist/image.js": {
+          "bytesInOutput": 1727
+        },
+        "node_modules/@react-three/uikit/dist/text.js": {
+          "bytesInOutput": 1765
+        },
+        "node_modules/@react-three/uikit/dist/svg.js": {
+          "bytesInOutput": 1735
+        },
+        "node_modules/@react-three/uikit/dist/icon.js": {
+          "bytesInOutput": 1594
+        },
+        "node_modules/@react-three/uikit/dist/input.js": {
+          "bytesInOutput": 1942
+        },
+        "node_modules/@react-three/uikit/dist/custom.js": {
+          "bytesInOutput": 1809
+        },
+        "node_modules/@react-three/uikit/dist/content.js": {
+          "bytesInOutput": 1673
+        },
+        "node_modules/@react-three/uikit/dist/fullscreen.js": {
+          "bytesInOutput": 1980
+        },
+        "node_modules/@react-three/uikit/dist/suspending.js": {
+          "bytesInOutput": 723
+        },
+        "node_modules/@react-three/uikit/node_modules/zustand/esm/vanilla.mjs": {
+          "bytesInOutput": 1659
+        },
+        "node_modules/@react-three/uikit/node_modules/zustand/esm/index.mjs": {
+          "bytesInOutput": 2018
+        },
+        "node_modules/@react-three/uikit/dist/portal.js": {
+          "bytesInOutput": 7563
+        },
+        "node_modules/@react-three/uikit/dist/video.js": {
+          "bytesInOutput": 2772
+        },
+        "node_modules/@react-three/uikit/dist/convert/html/preview.js": {
+          "bytesInOutput": 435
+        },
+        "node_modules/@react-three/uikit/dist/convert/html/index.js": {
+          "bytesInOutput": 424
+        },
+        "node_modules/@react-three/uikit/dist/index.js": {
+          "bytesInOutput": 447
+        },
+        "src/component/ui/UIRoot.tsx": {
+          "bytesInOutput": 951
         },
         "src/component/App.tsx": {
-          "bytesInOutput": 491
+          "bytesInOutput": 578
         },
         "src/Engine.ts": {
           "bytesInOutput": 1221
         },
         "src/main.ts": {
-          "bytesInOutput": 715
+          "bytesInOutput": 716
         }
       },
-      "bytes": 2375468
+      "bytes": 2937863
     },
     "dist/worker/main.js.map": {
       "imports": [],
       "exports": [],
       "inputs": {},
-      "bytes": 825823
+      "bytes": 826613
     },
     "dist/worker/main.js": {
       "imports": [
@@ -13040,10 +17458,10 @@
           "bytesInOutput": 896
         },
         "src/worker/main.ts": {
-          "bytesInOutput": 11689
+          "bytesInOutput": 12075
         }
       },
-      "bytes": 607101
+      "bytes": 607487
     },
     "dist/tw-to-css.js.map": {
       "imports": [],
