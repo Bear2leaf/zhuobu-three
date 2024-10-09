@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, useState } from "react";
 import { Environment, OrthographicCamera } from "@react-three/drei";
 import { useRef } from "react";
 import { CharacterController } from "./CharacterController";
@@ -8,6 +8,15 @@ import { useBearStore } from "../../state";
 
 export const Experience = () => {
   const bears = useBearStore((state) => state.bears);
+  const [objects, setObjects] = useState<string[]>([
+    "Sky",
+    "Room",
+    "Coin",
+    "Cube",
+    "Grid",
+    "Suzanne",
+    "Suzanne001",
+    "Suzanne002",])
   const shadowCameraRef = useRef(null);
   return (
     <>
@@ -29,10 +38,15 @@ export const Experience = () => {
         />
       </directionalLight>
       <ambientLight intensity={0.5}></ambientLight>
-        <GameMap
-          model={`/resources/models/game.glb`}
-        />
-        <CharacterController />
+      <GameMap
+        objects={objects}
+        model={`/resources/models/game.glb`}
+      />
+      <CharacterController onCollide={(name) => {
+        if (name === "Coin") {
+          setObjects(objects.filter((o) => o !== "Coin"));
+        }
+      }} />
     </>
   );
 };

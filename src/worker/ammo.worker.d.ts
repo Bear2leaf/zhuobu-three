@@ -45,10 +45,14 @@ export type MainMessage = {
     type: "tick",
     data: {delta: number, objects: PhyicsObject[]},
 }
-export type PhyicsObject = [number, number, number, number, number, number, number, string, number, number, number];
+export type PhyicsObject = [number, number, number, number, number, number, number, string];
+export type PhyicsCharacterObject = [number, number, number, number, number, number, number, number, number, number];
 export type WorkerMessage = {
     type: "update"
     data: PhyicsObject[];
+} | {
+    type: "updateCharacter"
+    data: PhyicsCharacterObject;
 } | {
     type: "ready",
 } | {

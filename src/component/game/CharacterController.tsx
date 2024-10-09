@@ -27,13 +27,13 @@ const lerpAngle = (start: number, end: number, t: number) => {
     return normalizeAngle(start + (end - start) * t);
 };
 
-export const CharacterController = () => {
+export const CharacterController = ({ onCollide }: { onCollide: (name: string) => void }) => {
     const { WALK_SPEED, RUN_SPEED, ROTATION_SPEED } = {
         WALK_SPEED: 1.6,
         RUN_SPEED: 3.2,
         ROTATION_SPEED: degToRad(0.5)
     };
-    const rb = usePhysicsCharacter();
+    const rb = usePhysicsCharacter({onCollide});
     const container = useRef<Group>(null!);
 
     const character = useRef<Group>(null!);

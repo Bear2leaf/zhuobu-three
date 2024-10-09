@@ -63,6 +63,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, sphereShape, localInertia);
         const body = new Ammo.btRigidBody(rbInfo);
         body.setFriction(1)
+        body.setRestitution(0);
         body.setAngularFactor(new Ammo.btVector3());
         const v = new UserData;
         v.propertities = {
@@ -74,25 +75,21 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         dynamicsWorld.addRigidBody(body);
         bodies.push(body);
     };
-    function readBulletObject(body: Ammo.btRigidBody, object: [number, number, number, number, number, number, number, string, number, number, number]) {
+    function readBulletObject(body: Ammo.btRigidBody) {
         body.getMotionState().getWorldTransform(transform);
-        const data = Ammo.castObject(body.getUserPointer(), UserData);
-        object[7] = data.name!;
         const origin = transform.getOrigin();
-        object[0] = origin.x();
-        object[1] = origin.y();
-        object[2] = origin.z();
+        const object: [number, number, number, number, number, number, number] = [0, 0, 0, 0, 0, 0, 0];
+        object[0] = (origin.x());
+        object[1] = (origin.y());
+        object[2] = (origin.z());
         const rotation = transform.getRotation();
-        object[3] = rotation.x();
-        object[4] = rotation.y();
-        object[5] = rotation.z();
-        object[6] = rotation.w();
-        const velocity = body.getLinearVelocity();
-        object[8] = velocity.x();
-        object[9] = velocity.y();
-        object[10] = velocity.z();
+        object[3] = (rotation.x());
+        object[4] = (rotation.y());
+        object[5] = (rotation.z());
+        object[6] = (rotation.w());
+        return object;
     }
-    function writeBulletObject(object: [number, number, number, number, number, number, number, string, number, number, number]) {
+    function writeBulletObject(object: PhyicsObject) {
         const body = bodies.find(body => Ammo.castObject(body.getUserPointer(), UserData).name === object[7]);
         if (body === undefined) {
             return;
@@ -112,11 +109,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         transform.setRotation(rotation);
         motionState.setWorldTransform(transform);
         body.setMotionState(motionState);
-        const velocity = body.getLinearVelocity();
-        velocity.setX(object[8]);
-        velocity.setY(object[9]);
-        velocity.setZ(object[10]);
-        body.setLinearVelocity(velocity);
     }
     function messageHandler(message: MainMessage) {
         if (message.type === "updateGravity") {
@@ -192,6 +184,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             body.setFriction(1)
             body.setCollisionFlags(CollisionFlags.CF_KINEMATIC_OBJECT)
             body.setUserPointer(v);
+            body.setRestitution(0);
             dynamicsWorld.addRigidBody(body);
             bodies.push(body);
         } else if (message.type === "resetWorld") {
@@ -332,9 +325,25 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         result.data = [];
         // Read bullet data into JS objects
         for (let i = 0; i < bodies.length; i++) {
-            const data: PhyicsObject = [0, 0, 0, 0, 0, 0, 0, "", 0, 0, 0];
-            result.data.push(data);
-            readBulletObject(bodies[i], result.data[i]);
+            const data = Ammo.castObject(bodies[i].getUserPointer(), UserData);
+            if (data.name) {
+                if (data.name === "Ball") {
+                    const object = readBulletObject(bodies[i]);
+                    const velocity: [number, number, number] = [0, 0, 0];
+                    const linearVelocity = bodies[i].getLinearVelocity();
+                    velocity[0] = linearVelocity.x();
+                    velocity[1] = linearVelocity.y();
+                    velocity[2] = linearVelocity.z();
+                    handler.postMessage({
+                        type: "updateCharacter",
+                        data: [...object, ...velocity]
+                    });
+                } else {
+                    const object = readBulletObject(bodies[i]);
+                    result.data.push([...object, data.name]);
+                }
+            }
+
         }
         handler.postMessage(result);
         prepareCollision();
