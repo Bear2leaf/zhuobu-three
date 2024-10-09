@@ -1,6 +1,5 @@
 import Ammo, { config, Module, handler, MainMessage, WorkerMessage, PhyicsObject } from "./ammo.worker.js"
 
-
 enum CollisionFlags {
     CF_STATIC_OBJECT = 1,
     CF_KINEMATIC_OBJECT = 2,

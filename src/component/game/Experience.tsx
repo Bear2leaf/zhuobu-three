@@ -8,7 +8,6 @@ import { useBearStore } from "../../state";
 
 export const Experience = () => {
   const bears = useBearStore((state) => state.bears);
-  console.log(bears)
   const shadowCameraRef = useRef(null);
   return (
     <>

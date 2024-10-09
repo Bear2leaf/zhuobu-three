@@ -10,8 +10,8 @@ export async function mainMinigame() {
     })
 }
 export async function start() {
-    import("./Engine.js").then(m => {
-        new m.default();
-    })
+    await import("./component/App");
 }
-
+declare var wx: any;
+const game = typeof wx !== "undefined" ? mainMinigame() : mainH5();
+game.then(start);

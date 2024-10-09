@@ -14,7 +14,7 @@ if (isBrowser) {
     config.locateFile = () => "/resources/wasm/ammo.wasm.wasm";
     onmessage = (event) => handler.onmessage && handler.onmessage(event.data);
     handler.postMessage = (data) => postMessage(data);
-    importScripts("/src/worker/ammo.wasm.js")
+    var Ammo = require('./ammo.wasm.js');
 } else {
     globalThis.WebAssembly = {
         instantiate(path, imports) {

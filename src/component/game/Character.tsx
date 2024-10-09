@@ -4,7 +4,7 @@ import { useAnimations } from "@react-three/drei";
 import { Mesh, SkinnedMesh } from "three";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { ObjectMap } from "@react-three/fiber";
-import { useGLTF } from "../../misc/Gltf.js";
+import { useGLTF } from "../loader/Gltf.js";
 
 export function Character({ animation, ...props }: { animation: string, scale: number }) {
   const group = useRef(null);
