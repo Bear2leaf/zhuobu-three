@@ -8,7 +8,7 @@
     "license": "ISC",
     "devDependencies": {
         "@types/three": "^0.169.0",
-        "esbuild": "^0.21.5",
+        "esbuild": "^0.25.0",
         "minigame-api-typings": "^3.8.4"
     },
     "dependencies": {

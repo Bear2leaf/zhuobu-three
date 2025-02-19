@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useRef, useContext, useState, ReactElement, useLayoutEffect } from 'react'
-import { MainMessage, PhyicsCharacterObject, PhyicsObject, WorkerMessage } from '../../worker/ammo.worker.js'
+import { MainMessage, PhyicsCharacterObject, PhyicsObject, WorkerMessage } from '../worker/ammo.worker.js'
 import { useFrame } from '@react-three/fiber';
 import { Group, Mesh, Quaternion, Vector3 } from 'three';
 
@@ -76,12 +76,16 @@ export const usePhysicsCharacter = ({ onCollide }: { onCollide: (name: string) =
             })
         }
         return () => {
-            // world.postMessage({
-            //     type: "removeMesh"
-            // })
+            worker.postMessage({
+                type: "removeMesh",
+                data: "Ball"
+            })
         }
     }, []);
     useFrame((state, delta) => {
+        if (!phyState.ready) {
+            return;
+        }
         if (ref.current && context.collideObject) {
             onCollide(context.collideObject);
             context.collideObject = "";
@@ -94,6 +98,7 @@ export const usePhysicsCharacter = ({ onCollide }: { onCollide: (name: string) =
 
     return ref
 }
+export const phyState = { ready: false }
 export const usePhysicsRigidBody = () => {
     const ref = useRef<Mesh & { setPosition?: (value: Vector3) => void }>(null)
     useEffect(() => {
@@ -111,7 +116,7 @@ export const usePhysicsRigidBody = () => {
             const indices = [...ref.current.geometry.index!.array];
             const name = ref.current.name;
             const transform = [...ref.current.position, ...ref.current.quaternion, ...ref.current.scale];
-            const convex = false;
+            const convex = name === "Cube";
             worker.postMessage({
                 type: "addMesh",
                 data: {

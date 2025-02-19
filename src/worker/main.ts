@@ -17,8 +17,6 @@ handler.onmessage = function (message) {
 
 
 Ammo.bind(Module)(config).then(function (Ammo) {
-    // Bullet-interfacing code
-
     handler.postMessage({ type: "ready" });
     const collisionConfiguration = new Ammo.btDefaultCollisionConfiguration();
     const dispatcher = new Ammo.btCollisionDispatcher(collisionConfiguration);
@@ -40,7 +38,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         name?: string
     }
     const gravity = new Ammo.btVector3(0, 0, 0);
-    let interval: number | null = null;
     const vertex0 = new Ammo.btVector3;
     const vertex1 = new Ammo.btVector3;
     const vertex2 = new Ammo.btVector3;
@@ -64,7 +61,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
         const body = new Ammo.btRigidBody(rbInfo);
         body.setFriction(1)
         body.setRestitution(0);
-        body.setAngularFactor(new Ammo.btVector3());
+        body.setAngularFactor(new Ammo.btVector3(0, 0, 0));
         const v = new UserData;
         v.propertities = {
             ball: true
@@ -124,10 +121,13 @@ Ammo.bind(Module)(config).then(function (Ammo) {
                 throw new Error("ball body is undefined")
             }
             const startTransform = new Ammo.btTransform();
+            const state = body.getMotionState();
+            state.getWorldTransform(startTransform);
             startTransform.setFromOpenGLMatrix(message.data.transform);
-            const state = new Ammo.btDefaultMotionState(startTransform);
             state.setWorldTransform(startTransform);
             body.setMotionState(state);
+            body.setLinearVelocity(new Ammo.btVector3(0, 0, 0));
+            body.setAngularVelocity(new Ammo.btVector3(0, 0, 0));
         } else if (message.type === "addMesh") {
             const startTransform = new Ammo.btTransform();
             startTransform.setIdentity();
@@ -159,7 +159,7 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             const v = new UserData;
             v.propertities = message.data.propertities;
             v.name = message.data.name;
-            if (v.propertities?.dynamic || convex) {
+            if (convex) {
                 shape = new Ammo.btConvexHullShape();
                 for (let i = 0; i < newVertices.length / 3; i++) {
                     vertex0.setValue(newVertices[i * 3 + 0], newVertices[i * 3 + 1], newVertices[i * 3 + 2]);
@@ -168,7 +168,6 @@ Ammo.bind(Module)(config).then(function (Ammo) {
             } else {
                 const mesh = new Ammo.btTriangleMesh();
 
-                mesh.setScaling(scale)
                 for (let i = 0; i < newVertices.length / 9; i++) {
                     vertex0.setValue(newVertices[i * 9 + 0], newVertices[i * 9 + 1], newVertices[i * 9 + 2]);
                     vertex1.setValue(newVertices[i * 9 + 3], newVertices[i * 9 + 4], newVertices[i * 9 + 5]);
@@ -177,6 +176,8 @@ Ammo.bind(Module)(config).then(function (Ammo) {
                 }
                 shape = new Ammo.btBvhTriangleMeshShape(mesh, true, true);
             }
+            shape.setMargin(0.05);
+            shape.setLocalScaling(scale);
             shape.calculateLocalInertia(mass, localInertia);
 
             const rbInfo = new Ammo.btRigidBodyConstructionInfo(mass, myMotionState, shape, localInertia);

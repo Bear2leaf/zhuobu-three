@@ -3,7 +3,7 @@ import { Environment, OrthographicCamera } from "@react-three/drei";
 import { useRef } from "react";
 import { CharacterController } from "./CharacterController";
 import { GameMap } from "./GameMap";
-import { useBearStore } from "../../state";
+import { useBearStore } from "../state";
 
 
 export const Experience = () => {

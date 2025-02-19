@@ -560,7 +560,6 @@ class Worker {
             throw new Error("unsupport worker args")
         }
     }
-    onmessage = null;
 }
 const _window = {
     Image,

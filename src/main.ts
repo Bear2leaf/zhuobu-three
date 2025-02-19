@@ -10,7 +10,7 @@ export async function mainMinigame() {
     })
 }
 export async function start() {
-    await import("./component/App");
+    await import("./App");
 }
 declare var wx: any;
 const game = typeof wx !== "undefined" ? mainMinigame() : mainH5();

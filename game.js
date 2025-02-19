@@ -1,2 +1,2 @@
-import "./adapter"
-import "./dist/main";
+require("./adapter");
+require("./dist/main");
